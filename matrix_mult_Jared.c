@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
 
 // Sources:
 // ChatGPT assisted in the syntax of the program below
@@ -72,7 +73,7 @@ void free_matrix_memory(float** matrix_a, float**matrix_b, float** matrix_c, int
 }
 
 int main() {
-    int size = 10000; // size of the nxn matrix
+    int size = 100; // size of the nxn matrix
 
 
     // Create randomly generated matrices
@@ -99,7 +100,12 @@ int main() {
     end_time = clock();
 
     // Calculate the amount of time used
-    cpu_time = ((double) (end_time - start_time)) / CLOCKS_PER_SEC;
+    cpu_time = ((double) (end_time - start_time)) / ((double) CLOCKS_PER_SEC);
+
+    // Calculate the number of mflops/s for matrix multiplication
+    int flops_total = 2*pow(size,3) - pow(size,2);
+    double performance_mflops = ((double) flops_total) / ((double) cpu_time * pow(10,6));
+
 
 
     // Print result matrix
@@ -107,6 +113,7 @@ int main() {
     // print_matrix(result, size);
 
     printf("CPU time take for matrix multiplication: %f seconds for N = %d. \n", cpu_time, size);
+    printf("Performance for matrix multiplication in Mflop/s: %f for N = %d. \n", performance_mflops, size);
 
     // Free the memory for matrices
     free_matrix_memory(matrix_a, matrix_b, matrix_c, size);
