@@ -72,7 +72,8 @@ void free_matrix_memory(float** matrix_a, float**matrix_b, float** matrix_c, int
 }
 
 int main() {
-    int size = 900; // size of the nxn matrix
+    int size = 10000; // size of the nxn matrix
+
 
     // Create randomly generated matrices
     float** matrix_a = generate_matrix(size);
@@ -80,20 +81,32 @@ int main() {
     float** matrix_c = generate_matrix(size);
 
     // Print values of randomly generated matrices
-    printf("Initial values of matrix a, b, and c \n");
-    print_matrix(matrix_a, size);
-    printf("\n");
-    print_matrix(matrix_b, size);
-    printf("\n");
-    print_matrix(matrix_c, size);
-    printf("\n");
+    // printf("Initial values of matrix a, b, and c \n");
+    // print_matrix(matrix_a, size);
+    // printf("\n");
+    // print_matrix(matrix_b, size);
+    // printf("\n");
+    // print_matrix(matrix_c, size);
+    // printf("\n");
 
-    // Compute multiplication of matrices
+    // Clock time to measure multipy_matrices time
+    clock_t start_time, end_time;
+    double cpu_time;
+
+    // Compute multiplication of matrices and measure time
+    start_time = clock();
     float** result = multiply_matrices(matrix_a, matrix_b, matrix_c, size);
+    end_time = clock();
+
+    // Calculate the amount of time used
+    cpu_time = ((double) (end_time - start_time)) / CLOCKS_PER_SEC;
+
 
     // Print result matrix
-    printf("Result of Matrix Multiplication \n");
-    print_matrix(result, size);
+    // printf("Result of Matrix Multiplication \n");
+    // print_matrix(result, size);
+
+    printf("CPU time take for matrix multiplication: %f seconds for N = %d. \n", cpu_time, size);
 
     // Free the memory for matrices
     free_matrix_memory(matrix_a, matrix_b, matrix_c, size);
