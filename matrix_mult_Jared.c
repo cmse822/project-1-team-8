@@ -102,6 +102,7 @@ int main() {
     // Calculate the amount of time used
     cpu_time = ((double) (end_time - start_time)) / ((double) CLOCKS_PER_SEC);
 
+
     // Calculate the number of mflops/s for matrix multiplication
     int flops_total = 2*pow(size,3) - pow(size,2);
     double performance_mflops = ((double) flops_total) / ((double) cpu_time * pow(10,6));
