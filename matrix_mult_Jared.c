@@ -72,7 +72,7 @@ void free_matrix_memory(float** matrix_a, float**matrix_b, float** matrix_c, int
 }
 
 int main() {
-    int size = 2; // size of the nxn matrix
+    int size = 900; // size of the nxn matrix
 
     // Create randomly generated matrices
     float** matrix_a = generate_matrix(size);
