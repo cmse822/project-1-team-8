@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
+#include "get_walltime.c"
+#include <sys/time.h>
 
 // Sources:
 // ChatGPT assisted in the syntax of the program below
@@ -91,29 +93,28 @@ int main() {
     // printf("\n");
 
     // Clock time to measure multipy_matrices time
-    clock_t start_time, end_time;
-    double cpu_time;
+    struct timeval startTime, endTime;
 
     // Compute multiplication of matrices and measure time
-    start_time = clock();
+     gettimeofday(&startTime, NULL);
     float** result = multiply_matrices(matrix_a, matrix_b, matrix_c, size);
-    end_time = clock();
+    gettimeofday(&endTime, NULL);
 
     // Calculate the amount of time used
-    cpu_time = ((double) (end_time - start_time)) / ((double) CLOCKS_PER_SEC);
+    double executionTime = (double)(endTime.tv_sec - startTime.tv_sec) +
+                           (double)(endTime.tv_usec - startTime.tv_usec) / 1000000.0;
 
 
     // Calculate the number of mflops/s for matrix multiplication
     int flops_total = 2*pow(size,3) - pow(size,2);
-    double performance_mflops = ((double) flops_total) / ((double) cpu_time * pow(10,6));
-
+    double performance_mflops = ((double) flops_total) / ((double) executionTime * pow(10,6));
 
 
     // Print result matrix
     // printf("Result of Matrix Multiplication \n");
     // print_matrix(result, size);
 
-    printf("CPU time take for matrix multiplication: %f seconds for N = %d. \n", cpu_time, size);
+    printf("CPU time take for matrix multiplication: %f seconds for N = %d. \n", executionTime, size);
     printf("Performance for matrix multiplication in Mflop/s: %f for N = %d. \n", performance_mflops, size);
 
     // Free the memory for matrices

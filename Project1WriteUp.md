@@ -1,12 +1,13 @@
 # Project 1 Write Up
+
 ## Table for Warm-up
+
 | Kernel | Arithmetic Intensity |
 | :---   | :---:                |
 | Y[j] += Y[j] + A[j][i] * B[i] | **3/32 flops/byte** (3/4 flops = 3 loads, 1 store, 3 operations) |
 | s += A[i] * A[i] | **1/4 flops/byte** (2 flops = 1 load, 2 operations) |
 | s += A[i] * B[i] | **1/8 flops/byte** (1 flop = 2 loads, 2 operations) |
 | Y[i] = A[i] + C*B[i] | **1/12 flops/byte** (2/3 flops = 2 loads, 1 store, 2 operations) |
-
 
 ## Part 1: Matrix-matrix Multiplication
 
@@ -16,7 +17,7 @@ In this first part of the project, you will test the performance of the basic ma
     Done!
 
 2. For a given matrix size _N_, what is the total number of floating point operations performed by this operator?
-    For two matrices of size N, the total number of operations that occurs is roughly 2N^3 - N^2. In the statement matrix_c[idx][idy] += matrix_a[idx][idz] * matrix_b[idz][idy], there are N multiplications and N-1 additions for each element in matrix_c. The resulting matrix_c has N^2 total elements. Therefore, there are N^2 * (N + (N-1)) total flops. Therefore, there are 2N^3 - N^2 total flops for matrix multiplication. 
+    For two matrices of size N, the total number of operations that occurs is roughly 2N^3 - N^2. In the statement matrix_c[idx][idy] += matrix_a[idx][idz] _matrix_b[idz][idy], there are N multiplications and N-1 additions for each element in matrix_c. The resulting matrix_c has N^2 total elements. Therefore, there are N^2_ (N + (N-1)) total flops. Therefore, there are 2N^3 - N^2 total flops for matrix multiplication.
 
 3. Using the supplied C routine `get_walltime.c`, or any other accurate means of measuring time, compute the performance in Mflop/s of the matrix-matrix multiply for _N_=100\. Be sure to perform enough repeat calculations of the timing to overcome any statistical noise in the measurement.
     On Jared's lab computer:
@@ -24,10 +25,9 @@ In this first part of the project, you will test the performance of the basic ma
         Trial 2: 995.000000 Mflops/s
         Trial 3: 995.000000 Mflops/s
 
-4. For the system you are running on, determine the clock speed of the processor and the cache size/layout. Use this information to estimate the theoretical peak performance of the system, assuming that the processor is capable of one flop per clock cycle (generally NOT true on modern architectures). How does the performance you measured in (3) compare to the theoretical peak performance of your system? 
-    On Jared's lab computer: (https://www.intel.com/content/www/us/en/gaming/resources/cpu-clock-speed.html)
+4. For the system you are running on, determine the clock speed of the processor and the cache size/layout. Use this information to estimate the theoretical peak performance of the system, assuming that the processor is capable of one flop per clock cycle (generally NOT true on modern architectures). How does the performance you measured in (3) compare to the theoretical peak performance of your system?
+    On Jared's lab computer: (<https://www.intel.com/content/www/us/en/gaming/resources/cpu-clock-speed.html>)
         - 5.8 GHz processor
-
 
 5. Now repeat the performance measurement for a range of matrix size `N` from 1 to 10,000,000. Make a plot of the resulting measured Gflop/s vs. `N`. On this plot place a horizontal line representing the theoretical peak performance based upon your system's clock speed.
 
