@@ -96,7 +96,7 @@ int main() {
     struct timeval startTime, endTime;
 
     // Compute multiplication of matrices and measure time
-     gettimeofday(&startTime, NULL);
+    gettimeofday(&startTime, NULL);
     float** result = multiply_matrices(matrix_a, matrix_b, matrix_c, size);
     gettimeofday(&endTime, NULL);
 
@@ -106,15 +106,17 @@ int main() {
 
 
     // Calculate the number of mflops/s for matrix multiplication
-    int flops_total = 2*pow(size,3) - pow(size,2);
-    double performance_mflops = ((double) flops_total) / ((double) executionTime * pow(10,6));
-
+    double Mflops_total = (2*pow(size,3) - pow(size,2)) / pow(10,6);
+    double performance_mflops = ((double) Mflops_total) / ((double) executionTime);
+    printf("Total number of Mflops: %f \n", Mflops_total);
+    printf("Excution time: %f in seconds \n", executionTime);
+    printf("Total performance flops in Mflops/s: %f \n", performance_mflops);
 
     // Print result matrix
     // printf("Result of Matrix Multiplication \n");
     // print_matrix(result, size);
 
-    printf("CPU time take for matrix multiplication: %f seconds for N = %d. \n", executionTime, size);
+    printf("Wall time take for matrix multiplication: %f seconds for N = %d. \n", executionTime, size);
     printf("Performance for matrix multiplication in Mflop/s: %f for N = %d. \n", performance_mflops, size);
 
     // Free the memory for matrices

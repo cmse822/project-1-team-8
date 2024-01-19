@@ -31,8 +31,8 @@ In this first part of the project, you will test the performance of the basic ma
         - L1 cache: 2.1 MB
         - L2 cache: 32.0 MB
         - L3 cache: 36.0 MB
-    By definition, the peak perforance is the clock speed times the number of independent FPUs.
-    Peak performance = 5.8 GHz * 0.002 GFlops = 0.0116 GFlops/s = 11.6 MFlops????
+    By definition, the peak perforance is the multiplication of clock speed, number of cores, and the number of independent FPUs.
+    Peak performance = 24 cores * 5.8 GHz * 1.33 (FPUs per core)  = 185.136 GFlops = 185136 Mflops/s
 
 5. Now repeat the performance measurement for a range of matrix size `N` from 1 to 10,000,000. Make a plot of the resulting measured Gflop/s vs. `N`. On this plot place a horizontal line representing the theoretical peak performance based upon your system's clock speed.
 
