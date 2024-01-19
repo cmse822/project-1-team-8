@@ -22,12 +22,17 @@ In this first part of the project, you will test the performance of the basic ma
 3. Using the supplied C routine `get_walltime.c`, or any other accurate means of measuring time, compute the performance in Mflop/s of the matrix-matrix multiply for _N_=100\. Be sure to perform enough repeat calculations of the timing to overcome any statistical noise in the measurement.
     On Jared's lab computer:
         Trial 1: 995.000000 Mflops/s
-        Trial 2: 995.000000 Mflops/s
-        Trial 3: 995.000000 Mflops/s
+        Trial 2: 991.035857 Mflops/s
+        Trial 3: 998.995984 Mflops/s
 
 4. For the system you are running on, determine the clock speed of the processor and the cache size/layout. Use this information to estimate the theoretical peak performance of the system, assuming that the processor is capable of one flop per clock cycle (generally NOT true on modern architectures). How does the performance you measured in (3) compare to the theoretical peak performance of your system?
     On Jared's lab computer: (<https://www.intel.com/content/www/us/en/gaming/resources/cpu-clock-speed.html>)
         - 5.8 GHz processor
+        - L1 cache: 2.1 MB
+        - L2 cache: 32.0 MB
+        - L3 cache: 36.0 MB
+    By definition, the peak perforance is the clock speed times the number of independent FPUs.
+    Peak performance = 5.8 GHz * 0.002 GFlops = 0.0116 GFlops/s = 11.6 MFlops????
 
 5. Now repeat the performance measurement for a range of matrix size `N` from 1 to 10,000,000. Make a plot of the resulting measured Gflop/s vs. `N`. On this plot place a horizontal line representing the theoretical peak performance based upon your system's clock speed.
 
