@@ -25,6 +25,11 @@ In this first part of the project, you will test the performance of the basic ma
         Trial 2: 991.035857 Mflops/s
         Trial 3: 998.995984 Mflops/s
 
+    On Jared's laptop:
+        Trial 1: 249.342188 Mflops/s
+        Trial 2: 380.424393 MFlops/s
+        Trial 3: 127.360000 MFlops/s
+
 4. For the system you are running on, determine the clock speed of the processor and the cache size/layout. Use this information to estimate the theoretical peak performance of the system, assuming that the processor is capable of one flop per clock cycle (generally NOT true on modern architectures). How does the performance you measured in (3) compare to the theoretical peak performance of your system?
     On Jared's lab computer: (<https://www.intel.com/content/www/us/en/gaming/resources/cpu-clock-speed.html>)
         - 5.8 GHz processor
@@ -32,7 +37,14 @@ In this first part of the project, you will test the performance of the basic ma
         - L2 cache: 32.0 MB
         - L3 cache: 36.0 MB
     By definition, the peak perforance is the multiplication of clock speed, number of cores, and the number of independent FPUs.
-    Peak performance = 24 cores * 5.8 GHz * 1.33 (FPUs per core)  = 185.136 GFlops = 185136 Mflops/s
+    Peak performance = 24 cores _5.8 GHz_ 1.33 (FPUs per core)  = 185.136 GFlops = 185136 Mflops/s
+
+    On Jared's laptop:
+        - 2.6 GHz processor
+        - L1 cache: 384 KB
+        - L2 cache: 1.5 MB
+        - L3 cache 12 MB
+    Peak performance = 6 cores _2.6 GHz_ 1 FPU = 15.6 GFlops/s = 15600 Mflops/s
 
 5. Now repeat the performance measurement for a range of matrix size `N` from 1 to 10,000,000. Make a plot of the resulting measured Gflop/s vs. `N`. On this plot place a horizontal line representing the theoretical peak performance based upon your system's clock speed.
 
