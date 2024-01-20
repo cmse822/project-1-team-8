@@ -11,6 +11,7 @@
 // Sources:
 // ChatGPT assisted in the syntax of the program below
 // https://stackoverflow.com/questions/13408990/how-to-generate-random-float-number-in-c
+// Also assisted in writing to CSV files in the main function
 
 // Create a random nxn matrix
 // TODO: Why does initial random values of matrix all the same for each time method is called
@@ -41,7 +42,7 @@ float** generate_matrix(int size) {
 void print_matrix(float** matrix, int size) {
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
-            printf("%d\t", matrix[i][j]);
+            printf("%f\t", matrix[i][j]);
         }
         printf("\n");
     }
@@ -75,8 +76,14 @@ void free_matrix_memory(float** matrix_a, float**matrix_b, float** matrix_c, int
 }
 
 int main() {
-    int size = 100; // size of the nxn matrix
+    // Seed the random number generator with the current time
+    srand(time(NULL));
 
+    // Generate a random number between 1 and 500
+    int size = 1 + rand() % (500); // size of the nxn matrix
+
+    // Print the random number
+    printf("Random Number: %d\n", size);
 
     // Create randomly generated matrices
     float** matrix_a = generate_matrix(size);
@@ -118,6 +125,25 @@ int main() {
 
     printf("Wall time take for matrix multiplication: %f seconds for N = %d. \n", executionTime, size);
     printf("Performance for matrix multiplication in Mflop/s: %f for N = %d. \n", performance_mflops, size);
+
+    // Open the CSV file for writing
+    FILE *csvFile = fopen("matrix_multiplication_team_8.csv", "w");
+
+    if (csvFile == NULL) {
+        fprintf(stderr, "Error opening file.\n");
+        return 1;
+    }
+
+    // Write header to the CSV file
+    fprintf(csvFile, "N,Time,Flops,Performance\n");
+
+    // Write data to the CSV file
+    fprintf(csvFile, "%d,%f,%f,%f\n", size, executionTime, Mflops_total, performance_mflops);
+
+    // Close the CSV file
+    fclose(csvFile);
+
+    printf("CSV file written successfully.\n");
 
     // Free the memory for matrices
     free_matrix_memory(matrix_a, matrix_b, matrix_c, size);
