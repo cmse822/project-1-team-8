@@ -54,9 +54,9 @@ In this first part of the project, you will test the performance of the basic ma
 
     On Jacob's laptop:
         - 1.4 GHz processor
-        - L1 cache:
-        - L2 cache:
-        - L3 cache:
+        - L1 cache: 32 KB
+        - L2 cache: 256 KB
+        - L3 cache: 6 MB
     Peak performance = 4 cores _1.4 GHz_ 1 FPU = 5.6 GFlops/s = 5600 Mflops/s
 
 7. Now repeat the performance measurement for a range of matrix size `N` from 1 to 10,000,000. Make a plot of the resulting measured Gflop/s vs. `N`. On this plot place a horizontal line representing the theoretical peak performance based upon your system's clock speed.
