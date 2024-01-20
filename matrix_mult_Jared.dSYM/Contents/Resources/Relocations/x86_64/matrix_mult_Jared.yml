@@ -1,0 +1,13 @@
+---
+triple:          'x86_64-apple-darwin'
+binary-path:     '/Users/jacobrutkowski/project-1-team-8/matrix_mult_Jared'
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _get_walltime_, symObjAddr: 0x0, symBinAddr: 0x1000037E0, symSize: 0x50 }
+  - { offsetInCU: 0x5A, offset: 0x5A, size: 0x8, addend: 0x0, symName: _get_walltime_, symObjAddr: 0x0, symBinAddr: 0x1000037E0, symSize: 0x50 }
+  - { offsetInCU: 0x8C, offset: 0x8C, size: 0x8, addend: 0x0, symName: _get_walltime, symObjAddr: 0x50, symBinAddr: 0x100003830, symSize: 0x20 }
+  - { offsetInCU: 0xB0, offset: 0xB0, size: 0x8, addend: 0x0, symName: _generate_matrix, symObjAddr: 0x70, symBinAddr: 0x100003850, symSize: 0xF0 }
+  - { offsetInCU: 0x13A, offset: 0x13A, size: 0x8, addend: 0x0, symName: _print_matrix, symObjAddr: 0x160, symBinAddr: 0x100003940, symSize: 0x90 }
+  - { offsetInCU: 0x1A4, offset: 0x1A4, size: 0x8, addend: 0x0, symName: _free_matrix_memory, symObjAddr: 0x1F0, symBinAddr: 0x1000039D0, symSize: 0x90 }
+  - { offsetInCU: 0x20E, offset: 0x20E, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x280, symBinAddr: 0x100003A60, symSize: 0x280 }
+  - { offsetInCU: 0x2C7, offset: 0x2C7, size: 0x8, addend: 0x0, symName: _multiply_matrices, symObjAddr: 0x500, symBinAddr: 0x100003CE0, symSize: 0xD2 }
+...
