@@ -11,7 +11,7 @@
 // Sources:
 // ChatGPT assisted in the syntax of the program below
 // https://stackoverflow.com/questions/13408990/how-to-generate-random-float-number-in-c
-// Also assisted in writing to CSV files in the main function
+// Also assisted in writing to CSV files in the main
 
 // Create a random nxn matrix
 // TODO: Why does initial random values of matrix all the same for each time method is called
@@ -127,7 +127,7 @@ int main() {
     printf("Performance for matrix multiplication in Mflop/s: %f for N = %d. \n", performance_mflops, size);
 
     // Open the CSV file for writing
-    FILE *csvFile = fopen("matrix_multiplication_team_8.csv", "w");
+    FILE *csvFile = fopen("matrix_multiplication_team_8.csv", "a");
 
     if (csvFile == NULL) {
         fprintf(stderr, "Error opening file.\n");
