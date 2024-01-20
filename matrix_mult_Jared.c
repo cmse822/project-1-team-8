@@ -87,9 +87,20 @@ int main() {
     int num_trials = 3;
     int size;
 
+    // Open the CSV file for writing
+    FILE *csvFile = fopen("matrix_multiplication_team_8.csv", "a");
+
+    if (csvFile == NULL) {
+        fprintf(stderr, "Error opening file.\n");
+        return 1;
+    }
+
+    // Write header to the CSV file
+    fprintf(csvFile, "Trial,N,Time,Flops,Performance\n");
+
     for (int i = 0; i < sizesArrayLength; i++) {
         size = sizes[i];
-        
+
         printf("Size of the matrix: %d \n", size);
 
         for (int trial = 1; trial <= num_trials; trial ++) {
@@ -134,29 +145,17 @@ int main() {
             printf("Wall time take for matrix multiplication: %f seconds for N = %d. \n", executionTime, size);
             printf("Performance for matrix multiplication in Mflop/s: %f for N = %d. \n", performance_mflops, size);
 
-            // Open the CSV file for writing
-            FILE *csvFile = fopen("matrix_multiplication_team_8.csv", "a");
-
-            if (csvFile == NULL) {
-                fprintf(stderr, "Error opening file.\n");
-                return 1;
-            }
-
-            // Write header to the CSV file
-            fprintf(csvFile, "Trial,N,Time,Flops,Performance\n");
-
             // Write data to the CSV file
             fprintf(csvFile, "%d,%d,%f,%f,%f\n", trial, size, executionTime, Mflops_total, performance_mflops);
-
-            // Close the CSV file
-            fclose(csvFile);
-
-            printf("CSV file written successfully.\n");
 
             // Free the memory for matrices
             free_matrix_memory(matrix_a, matrix_b, matrix_c, size);
         }
     }
+
+    // Close the CSV file
+    fclose(csvFile);
+    printf("CSV file written successfully.\n");
     
     return 0;
 }
