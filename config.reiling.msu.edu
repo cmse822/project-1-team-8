@@ -1,6 +1,6 @@
 # 1 x 24-core Intel i9-13900F processors
 
-ERT_RESULTS Results.pegasus.uoregon.edu.01
+ERT_RESULTS Results.reiling.msu.edu.01
 
 ERT_DRIVER  driver1
 ERT_KERNEL  kernel1
