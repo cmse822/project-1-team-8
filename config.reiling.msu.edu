@@ -17,7 +17,6 @@ ERT_LDLIBS
 
 ERT_PRECISION FP64
 
-# ERT_RUN     export OMP_NUM_THREADS=ERT_OPENMP_THREADS; export OMP_PROC_BIND=spread; export OMP_PLACES=threads; mpirun -np ERT_MPI_PROCS ERT_CODE
 ERT_RUN     export OMP_NUM_THREADS=1; export OMP_PROC_BIND=false; export OMP_PLACES=threads; mpirun -np ERT_MPI_PROCS ERT_CODE
 
 
