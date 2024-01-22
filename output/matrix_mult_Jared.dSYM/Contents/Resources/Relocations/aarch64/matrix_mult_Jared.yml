@@ -1,0 +1,13 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/berkatik/Desktop/Courses/CMSE822 - Parallel computing/Assignments/project1/project-1-team-8/output/matrix_mult_Jared'
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _get_walltime_, symObjAddr: 0x0, symBinAddr: 0x100003598, symSize: 0x58 }
+  - { offsetInCU: 0x5A, offset: 0x5A, size: 0x8, addend: 0x0, symName: _get_walltime_, symObjAddr: 0x0, symBinAddr: 0x100003598, symSize: 0x58 }
+  - { offsetInCU: 0x8C, offset: 0x8C, size: 0x8, addend: 0x0, symName: _get_walltime, symObjAddr: 0x58, symBinAddr: 0x1000035F0, symSize: 0x24 }
+  - { offsetInCU: 0xB0, offset: 0xB0, size: 0x8, addend: 0x0, symName: _generate_matrix, symObjAddr: 0x7C, symBinAddr: 0x100003614, symSize: 0x114 }
+  - { offsetInCU: 0x13A, offset: 0x13A, size: 0x8, addend: 0x0, symName: _print_matrix, symObjAddr: 0x190, symBinAddr: 0x100003728, symSize: 0xC0 }
+  - { offsetInCU: 0x1A4, offset: 0x1A4, size: 0x8, addend: 0x0, symName: _free_matrix_memory, symObjAddr: 0x250, symBinAddr: 0x1000037E8, symSize: 0xA4 }
+  - { offsetInCU: 0x20E, offset: 0x20E, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x2F4, symBinAddr: 0x10000388C, symSize: 0x394 }
+  - { offsetInCU: 0x342, offset: 0x342, size: 0x8, addend: 0x0, symName: _multiply_matrices, symObjAddr: 0x688, symBinAddr: 0x100003C20, symSize: 0x104 }
+...
