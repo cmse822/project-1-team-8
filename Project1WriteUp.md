@@ -21,6 +21,15 @@ In this first part of the project, you will test the performance of the basic ma
 
 3. Using the supplied C routine `get_walltime.c`, or any other accurate means of measuring time, compute the performance in Mflop/s of the matrix-matrix multiply for _N_=100\. Be sure to perform enough repeat calculations of the timing to overcome any statistical noise in the measurement.
 
+     By definition, the peak perforance is the multiplication of clock speed, number of cores, and the number of independent FPUs (1 for this example).
+
+    | Computer            | MFlops/s (avg over 3 trials) | Processor Clock Speed (GHz) | L1 cache size | L2 cache size | L3 cache size | Number of cores | Peak Performance (Gflops/s) |
+    |---------------------|------------------------------|-----------------------------|---------------|---------------|---------------|-----------------|-----------------------------|
+    | Jared's Desktop     |            994.67            |             5.8             |      2.1 MB   |     32.0 MB   |      36.0 MB  |       24        |              139.2          |
+    | HPCC (dev-indel18)  |                              |             2.4             |      32 KB    |     1024 KB   |     28160 KB  |       20        |               48.0          |
+    
+
+
     On Jared's lab computer:
         Trial 1: 995.000000 Mflops/s
         Trial 2: 991.035857 Mflops/s
@@ -48,7 +57,7 @@ In this first part of the project, you will test the performance of the basic ma
         - L2 cache: 32.0 MB
         - L3 cache: 36.0 MB
     By definition, the peak perforance is the multiplication of clock speed, number of cores, and the number of independent FPUs.
-    Peak performance = 24 cores _5.8 GHz_ 1.33 (FPUs per core)  = 185.136 GFlops = 185136 Mflops/s
+    Peak performance = 24 cores _5.8 GHz_ 1 (FPUs per core)  = 185.136 GFlops = 185136 Mflops/s
 
     On Jared's laptop:
         - 2.6 GHz processor
