@@ -80,15 +80,15 @@ int main() {
     srand(time(NULL));
 
     // Generate a random number between 1 and 500
-    int sizes[] = {5, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000}; // size of the nxn matrix
+    int sizes[] = {50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1100, 1200, 1300, 1400, 1500}; // size of the nxn matrix
     int sizesArrayLength = sizeof(sizes) / sizeof(sizes[0]);
 
     // Number of trials per matrix size
-    int num_trials = 3;
+    int num_trials = 5;
     int size;
 
     // Open the CSV file for writing
-    FILE *csvFile = fopen("matrix_multiplication_team_8.csv", "a");
+    FILE *csvFile = fopen("matrix_multiplication_team_8.csv", "w");
 
     if (csvFile == NULL) {
         fprintf(stderr, "Error opening file.\n");
