@@ -1,0 +1,9 @@
+expr: not a decimal number: 'ERT_MPI_PROCS'
+--------------------------------------------------------------------------
+An unrecognized option was included on the mpirun command line:
+
+  Option: -d
+
+Please use the "mpirun --help" command to obtain a list of all
+supported options.
+--------------------------------------------------------------------------
