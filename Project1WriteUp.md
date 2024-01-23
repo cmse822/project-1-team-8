@@ -92,6 +92,7 @@ To your project git repo, commit your code for performing the matrix-matrix mult
 
 3. Run the ERT in serial mode on your local machine. Report the peak performances and bandwidths (for all caches levels as well as DRAM). Where is the "ridge point" of the roofline for the various cases?
     In response below, obtained by running on the HPCC (See roofline.png)
+    ![Roofline plot in HPPC](rooflineHPPC_Team8.png)
 
 4. Consider the four FP kernels in "Roofline: An Insightful Visual Performance Model for Floating-Point Programs and Multicore Architectures" (see their Table 2). Assuming the high end of operational (i.e., "arithmetic") intensity, how would these kernels perform on the platforms you are testing? What optimization strategy would you recommend to increase performance of these kernels?
 
