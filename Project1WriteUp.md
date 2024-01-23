@@ -36,6 +36,11 @@ In this first part of the project, you will test the performance of the basic ma
         Trial 2: 612.873422 Mflops/s
         Trial 3: 557.266872 Mflops/s
 
+    On Berk's laptop:
+        Trial 1: 407.036204 Mflops/s
+        Trial 2: 437.458782 Mflops/s
+        Trial 3: 453.406243 Mflops/s
+
 4. For the system you are running on, determine the clock speed of the processor and the cache size/layout. Use this information to estimate the theoretical peak performance of the system, assuming that the processor is capable of one flop per clock cycle (generally NOT true on modern architectures). How does the performance you measured in (3) compare to the theoretical peak performance of your system?
     On Jared's lab computer: (<https://www.intel.com/content/www/us/en/gaming/resources/cpu-clock-speed.html>)
         - 5.8 GHz processor
@@ -58,6 +63,13 @@ In this first part of the project, you will test the performance of the basic ma
         - L2 cache: 256 KB
         - L3 cache: 6 MB
     Peak performance = 4 cores _1.4 GHz_ 1 FPU = 5.6 GFlops/s = 5600 Mflops/s
+
+    On Berk's laptop:
+        - 3.2 GHz processor
+        - L1 cache: 2.9 MB
+        - L2 cache: 28 MB
+        - L3 cache: 24 MB
+    Peak performance = 8 performance cores _3.2 GHz_ + 2 efficiency cores _2.02_ 1 FPU = 29.64 GFlops/s = 5600 Mflops/s
 
 5. Now repeat the performance measurement for a range of matrix size `N` from 1 to 10,000,000. Make a plot of the resulting measured Gflop/s vs. `N`. On this plot place a horizontal line representing the theoretical peak performance based upon your system's clock speed.
 
