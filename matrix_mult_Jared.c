@@ -13,8 +13,7 @@
 // https://stackoverflow.com/questions/13408990/how-to-generate-random-float-number-in-c
 // Also assisted in writing to CSV files in the main
 
-// Create a random nxn matrix
-// TODO: Why does initial random values of matrix all the same for each time method is called
+
 float** generate_matrix(int size) {
     float** matrix = (float**)malloc(size * sizeof(int*));
     
@@ -76,16 +75,14 @@ void free_matrix_memory(float** matrix_a, float**matrix_b, float** matrix_c, int
 }
 
 int main() {
+    printf("start \n");
     // Seed the random number generator with the current time
     srand(time(NULL));
 
     // Generate a random number between 1 and 500
-    int sizes[] = {50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1100, 1200, 1300, 1400, 1500}; // size of the nxn matrix
-    int sizesArrayLength = sizeof(sizes) / sizeof(sizes[0]);
+    //int sizes[] = {50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1100, 1200, 1300, 1400, 1500}; // size of the nxn matrix
+    //int sizesArrayLength = sizeof(sizes) / sizeof(sizes[0]);
 
-    // Number of trials per matrix size
-    int num_trials = 5;
-    int size;
 
     // Open the CSV file for writing
     FILE *csvFile = fopen("matrix_multiplication_team_8.csv", "w");
@@ -98,25 +95,22 @@ int main() {
     // Write header to the CSV file
     fprintf(csvFile, "Trial,N,Time,Flops,Performance\n");
 
-    for (int i = 0; i < sizesArrayLength; i++) {
-        size = sizes[i];
+    // Labels for maximum matrix size and number of trials per matrix calculation
+    int max_matrix_dimension = 2000;
+    int num_trials = 5;
+
+    for (int i = 100; i <= max_matrix_dimension; i += 50) {
+        //size = sizes[i];
+        int size = i;
 
         printf("Size of the matrix: %d \n", size);
 
-        for (int trial = 1; trial <= num_trials; trial ++) {
+        for (int trial = 1; trial <= num_trials; trial++) {
+            printf("              trial num: %d \n", trial);
             // Create randomly generated matrices
             float** matrix_a = generate_matrix(size);
             float** matrix_b = generate_matrix(size);
             float** matrix_c = generate_matrix(size);
-
-            // Print values of randomly generated matrices
-            // printf("Initial values of matrix a, b, and c \n");
-            // print_matrix(matrix_a, size);
-            // printf("\n");
-            // print_matrix(matrix_b, size);
-            // printf("\n");
-            // print_matrix(matrix_c, size);
-            // printf("\n");
 
             // Clock time to measure multipy_matrices time
             struct timeval startTime, endTime;
@@ -132,18 +126,15 @@ int main() {
 
 
             // Calculate the number of mflops/s for matrix multiplication
-            double Mflops_total = (2*pow(size,3) - pow(size,2)) / pow(10,6);
+            long double Mflops_total = (2*pow(size,3) - pow(size,2)) / pow(10,6);
             double performance_mflops = ((double) Mflops_total) / ((double) executionTime);
-            printf("Total number of Mflops: %f \n", Mflops_total);
-            printf("Excution time: %f in seconds \n", executionTime);
-            printf("Total performance flops in Mflops/s: %f \n", performance_mflops);
+            //printf("Total number of Mflops: %f \n", Mflops_total);
+            //printf("Excution time: %f in seconds \n", executionTime);
+            //printf("Total performance flops in Mflops/s: %f \n", performance_mflops);
 
-            // Print result matrix
-            // printf("Result of Matrix Multiplication \n");
-            // print_matrix(result, size);
 
-            printf("Wall time take for matrix multiplication: %f seconds for N = %d. \n", executionTime, size);
-            printf("Performance for matrix multiplication in Mflop/s: %f for N = %d. \n", performance_mflops, size);
+            //printf("Wall time take for matrix multiplication: %f seconds for N = %d. \n", executionTime, size);
+            //printf("Performance for matrix multiplication in Mflop/s: %f for N = %d. \n", performance_mflops, size);
 
             // Write data to the CSV file
             fprintf(csvFile, "%d,%d,%f,%f,%f\n", trial, size, executionTime, Mflops_total, performance_mflops);

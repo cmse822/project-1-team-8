@@ -84,6 +84,8 @@ In this first part of the project, you will test the performance of the basic ma
 
 6. How does the measured performance for multiple _N_'s compare to peak? Are there any "features" in your plot? Explain them in the context of the hardware architecture of your system. Include in your write-up a description of your system's architecture (processor, cache, etc.).
 
+    #TODO: Finish this problem
+
 To your project git repo, commit your code for performing the matrix-matrix multiply performance measurements, the plots of your results, and a brief write-up (in plain text or markdown) addressing the above questions and discussing your results. Pay particular attention to the comparison between different architectures and give explanations for them.
 
 ## Part 2: The Roofline Model
@@ -101,10 +103,13 @@ To your project git repo, commit your code for performing the matrix-matrix mult
 
     Stencil: Jacobi method, must read every point from DRAM, perform 8 flops, and then write every point back to DRAM. Cache locality is the most important factor when it comes to performance of the Stencil kernel. Performs at just over 0.5 flops/byte ideally, which is achieved by optimizing using SIMDization and cache bypass. However, Stencil can also be optimized to a 1/3 flop:byte ratio using cache blocking.
 
-    3-D FFT:
+    3-D FFT: #TODO: Finish this problem
 
 5. Address the same questions in (4) for the four kernels given in the Warm-up above.
 
+    #TODO Finish this problem
+
 6. Compare your results for the roofline model to what you obtained for the matrix-matrix multiplication operation from Part 1. How are the rooflines of memory bandwidth related to the features in the algorithmic performance as a function of matrix size?
+    #TODO Finish this problem
 
 To your project write-up, add your plots of the roofline model for the systems you tested, and responses addressing the above questions.
