@@ -106,7 +106,7 @@ To your project git repo, commit your code for performing the matrix-matrix mult
 
     Stencil: Jacobi method, must read every point from DRAM, perform 8 flops, and then write every point back to DRAM. Cache locality is the most important factor when it comes to performance of the Stencil kernel. Performs at just over 0.5 flops/byte ideally, which is achieved by optimizing using SIMDization and cache bypass. However, Stencil can also be optimized to a 1/3 flop:byte ratio using cache blocking.
 
-    3-D FFT: #TODO: Finish this problem
+    3-D FFT: Rather high operational intensity. It will be compute bound, so the performance will be limited by the stength of computation of the system. Optimization of computation leads to better performance, so in additon to SIMDization and cache bypass, we would also recommand unrolling loops.
 
 5. Address the same questions in (4) for the four kernels given in the Warm-up above.
 
