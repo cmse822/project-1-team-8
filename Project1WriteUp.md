@@ -82,6 +82,8 @@ In this first part of the project, you will test the performance of the basic ma
 
 5. Now repeat the performance measurement for a range of matrix size `N` from 1 to 10,000,000. Make a plot of the resulting measured Gflop/s vs. `N`. On this plot place a horizontal line representing the theoretical peak performance based upon your system's clock speed.
 
+    #TODO: Chaaran making plots on HPCC and someone's personal computer
+
 6. How does the measured performance for multiple _N_'s compare to peak? Are there any "features" in your plot? Explain them in the context of the hardware architecture of your system. Include in your write-up a description of your system's architecture (processor, cache, etc.).
 
     #TODO: Finish this problem
