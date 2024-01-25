@@ -126,7 +126,7 @@ int main() {
 
 
             // Calculate the number of mflops/s for matrix multiplication
-            long double Mflops_total = (2*pow(size,3) - pow(size,2)) / pow(10,6);
+            double Mflops_total = (2*pow(size,3) - pow(size,2)) / pow(10,6);
             double performance_mflops = ((double) Mflops_total) / ((double) executionTime);
             //printf("Total number of Mflops: %f \n", Mflops_total);
             //printf("Excution time: %f in seconds \n", executionTime);
