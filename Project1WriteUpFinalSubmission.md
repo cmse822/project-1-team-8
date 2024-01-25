@@ -49,7 +49,7 @@ In this first part of the project, you will test the performance of the basic ma
 
 To your project git repo, commit your code for performing the matrix-matrix multiply performance measurements, the plots of your results, and a brief write-up (in plain text or markdown) addressing the above questions and discussing your results. Pay particular attention to the comparison between different architectures and give explanations for them.
 
-## Part 2: The Roofline Model
+## Part 2: The Roofline Modelon
 
 3. Run the ERT in serial mode on your local machine. Report the peak performances and bandwidths (for all caches levels as well as DRAM). Where is the "ridge point" of the roofline for the various cases?
     In response below, obtained by running on the HPCC (See roofline.png)
@@ -59,7 +59,7 @@ To your project git repo, commit your code for performing the matrix-matrix mult
 
     Information for answers to this question were found in <https://crd.lbl.gov/assets/pubs_presos/parlab08-roofline-talk.pdf>.
 
-    SpMV: Relatively low arithmetic intensity. It will be memory bound, so it won't reach the peak performance. Nowhere to utilize locality, so it requires a lot of memory loading. An optimization strategy that we would recommend would be matrix compression with register blocking, as that would improve the flop:byte ratio of this kernel. Since this kernel ustilizes all memory channels, it would perform better on the HPCC because there this  
+    SpMV: Relatively low arithmetic intensity. It will be memory bound, so it won't reach the peak performance since there is irregular memory access to the source vector which makes it difficult to load. There is also a very low arithmetic intnesity (less than 0.166 flops/byte) which most likely leads to memory bound. An optimization strategy that we would recommend would be matrix compression with register blocking, as that would improve the flop:byte ratio of this kernel. Since this kernel ustilizes all memory channels, it would perform better on the HPCC because is more cache space than on Berk's laptop. The Spacse matrix-vector multiplication also runs at less than 10% of peak floating-point performance in unified processors. Therefore, SpMV would be running at 2.964 Gflops/s on Berk's laptop and 4.8 Gflops/s on the HPCC.
     #Jared Answer
 
     LBMHD: An optimization strategy that we would recommend is explicit SIMDization and cache bypass using the instruction movntpd, as this will increase the flop:byte ratio to ~1.0 on x86/Cell (compared to 0.7 flop:byte without).

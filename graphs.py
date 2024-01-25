@@ -4,9 +4,9 @@ import matplotlib.pyplot as plt
 from collections import defaultdict
 import scipy.stats as st
 
-path = r'/Users/berkatik/Desktop/Courses/CMSE822 - Parallel computing/Assignments/project-1-team-8/output/matrix_multiplication_team_8.csv'
+path = r"C:\Users\jreil\OneDrive\Documents\Michigan_State_University\Parallel_Computing\project-1-team-8\matrix_multiplication_team_8.csv"
 data = pd.read_csv(path)
-plot_name = 'performance_chaaran_laptop'
+plot_name = 'performance_jared_laptop'
 
 mflops_s_data = defaultdict(list)
 
