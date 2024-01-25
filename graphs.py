@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from collections import defaultdict
 import scipy.stats as st
 
-path = r'D:\PhD\Parallel Computing\project-1-team-8\matrix_multiplication_team_8.csv'
+path = r'/Users/berkatik/Desktop/Courses/CMSE822 - Parallel computing/Assignments/project-1-team-8/output/matrix_multiplication_team_8.csv'
 data = pd.read_csv(path)
 plot_name = 'performance_chaaran_laptop'
 
@@ -20,7 +20,8 @@ x = []
 means = []
 ci_lows = []
 ci_highs = []
-
+y_max = max(mflops_s_data.values())[0]
+x_max = max(mflops_s_data.items())[0]
 for n, perf_data in mflops_s_data.items():
     x.append(n)
     means.append(np.mean(perf_data))
@@ -30,7 +31,7 @@ for n, perf_data in mflops_s_data.items():
 
 # Plot the line
 plt.plot(x, means, label='Mean')
-
+plt.hlines(y=y_max, xmin=0, xmax=x_max, colors="r", label="Max Perf.")
 # Plot the confidence interval as a shaded area
 plt.fill_between(x, ci_lows, ci_highs, color='gray', alpha=0.3, label='95% Confidence Interval')
 

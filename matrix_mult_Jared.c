@@ -77,7 +77,7 @@ void free_matrix_memory(float** matrix_a, float**matrix_b, float** matrix_c, int
 int main() {
     printf("start \n");
     // Seed the random number generator with the current time
-    srand(time(NULL));
+    srand(42); // Keeping the seed constant can be beneficial for reproducability.
 
     // Generate a random number between 1 and 500
     //int sizes[] = {50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1100, 1200, 1300, 1400, 1500}; // size of the nxn matrix
@@ -96,7 +96,7 @@ int main() {
     fprintf(csvFile, "Trial,N,Time,Flops,Performance\n");
 
     // Labels for maximum matrix size and number of trials per matrix calculation
-    int max_matrix_dimension = 2000;
+    int max_matrix_dimension = 3000;
     int num_trials = 5;
 
     for (int i = 100; i <= max_matrix_dimension; i += 50) {
