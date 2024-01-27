@@ -27,8 +27,6 @@ In this first part of the project, you will test the performance of the basic ma
     |---------------------|------------------------------|-----------------------------|---------------|---------------|---------------|-----------------|-----------------------------|
     | Jared's Desktop     |            994.67            |             5.8             |      2.1 MB   |     32.0 MB   |      36.0 MB  |       24        |              139.2          |
     | HPCC (dev-indel18)  |                              |             2.4             |      32 KB    |     1024 KB   |     28160 KB  |       20        |               48.0          |
-    
-
 
     On Jared's lab computer:
         Trial 1: 995.000000 Mflops/s
@@ -100,7 +98,7 @@ To your project git repo, commit your code for performing the matrix-matrix mult
 
     Information for answers to this question were found in <https://crd.lbl.gov/assets/pubs_presos/parlab08-roofline-talk.pdf>.
 
-    SpMV: Relatively low arithmetic intensity. It will be memory bound, so it won't reach the peak performance. Nowhere to utilize locality, so it requires a lot of memory loading. An optimization strategy that we would recommend would be matrix compression with register blocking, as that would improve the flop:byte ratio of this kernel.
+    SpMV: Relatively low arithmetic intensity. It will be memory bound, so it won't reach the peak performance. Nowhere to utilize locality, so it requires a lot of memory loading. An optimization strategy that we would recommend would be matrix compression with register blocking, as that would improve the flop:byte ratio of this kernel. Since this kernel ustilizes all memory channels, it would perform better on the HPCC because there this  
 
     LBMHD: An optimization strategy that we would recommend is explicit SIMDization and cache bypass using the instruction movntpd, as this will increase the flop:byte ratio to ~1.0 on x86/Cell (compared to 0.7 flop:byte without).
 
