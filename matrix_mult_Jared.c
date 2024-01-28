@@ -96,7 +96,7 @@ int main() {
     fprintf(csvFile, "Trial,N,Time,Flops,Performance\n");
 
     // Labels for maximum matrix size and number of trials per matrix calculation
-    int max_matrix_dimension = 3000;
+    int max_matrix_dimension = 2500;
     int num_trials = 5;
 
     for (int i = 100; i <= max_matrix_dimension; i += 50) {

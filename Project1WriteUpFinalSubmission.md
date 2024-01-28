@@ -33,14 +33,14 @@ In this first part of the project, you will test the performance of the basic ma
         Trial 2: 437.458782 Mflops/s
         Trial 3: 453.406243 Mflops/s
 
-    Peak performance = 8 performance cores _3.2 GHz_ + 2 efficiency cores _2.02_ 1 FPU = 29.64 GFlops/s = 5600 Mflops/s
+    Peak performance = 8 performance cores _3.2 GHz_ + 2 efficiency cores _2.02_ 1 FPU = 29.64 GFlops/s 3200
 
 4. For the system you are running on, determine the clock speed of the processor and the cache size/layout. Use this information to estimate the theoretical peak performance of the system, assuming that the processor is capable of one flop per clock cycle (generally NOT true on modern architectures). How does the performance you measured in (3) compare to the theoretical peak performance of your system?
     Please see graph above.
 
 5. Now repeat the performance measurement for a range of matrix size `N` from 1 to 10,000,000. Make a plot of the resulting measured Gflop/s vs. `N`. On this plot place a horizontal line representing the theoretical peak performance based upon your system's clock speed.
 
-    #TODO: Berk plot horizontal line to represent peak performance
+    ![N = 2500 Performance Measurements M1 Pro](performance_berk_laptop.png)
     #TODO: Chaaran horizonal line on graph
 
 6. How does the measured performance for multiple _N_'s compare to peak? Are there any "features" in your plot? Explain them in the context of the hardware architecture of your system. Include in your write-up a description of your system's architecture (processor, cache, etc.).
