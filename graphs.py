@@ -37,7 +37,7 @@ plt.fill_between(x, ci_lows, ci_highs, color='gray', alpha=0.3, label='95% Confi
 
 plt.xlabel('N')
 plt.ylabel('MFLOPs/s')
-plt.title('MFLOPs/s Vs N')
+plt.title('M1 Pro Performance')
 plt.legend()
 
 plt.savefig(f'{plot_name}.png')
