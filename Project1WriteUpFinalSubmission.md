@@ -49,10 +49,10 @@ In this first part of the project, you will test the performance of the basic ma
 
 To your project git repo, commit your code for performing the matrix-matrix multiply performance measurements, the plots of your results, and a brief write-up (in plain text or markdown) addressing the above questions and discussing your results. Pay particular attention to the comparison between different architectures and give explanations for them.
 
-## Part 2: The Roofline Modelon
+## Part 2: The Roofline Model
 
 3. Run the ERT in serial mode on your local machine. Report the peak performances and bandwidths (for all caches levels as well as DRAM). Where is the "ridge point" of the roofline for the various cases?
-| Architecture | L1 Bandwidth (GB/s) | L1 Peak Performance (GFLOPs/S) | L2 Bandwidth (GB/s) | L2 Peak Performance (GFLOPS/s) | L3 Bandwidth (GB/s) | L3 Peak Performance (GFLOPS/s) | DRAM Performance (GB/s) | Ridge Point |
+| Architecture | L1 Bandwidth (GB/s) | L1 Peak Performance (GFLOPs/s) | L2 Bandwidth (GB/s) | L2 Peak Performance (GFLOPS/s) | L3 Bandwidth (GB/s) | L3 Peak Performance (GFLOPS/s) | DRAM Bandwidth (GB/s) | DRAM Peak Performance (GFLOPS/s) | Ridge Point |
 | Berk's Laptop|    164.6  |  32.92  | 0.0 | 0.0 | 0.0 | 0.0 | 109.6 | 32.88 | L1 Ridge Point: 0.2, DRAM Ridge Point: 0.3 |
 | HPCC         |    53.9   |  11.32  | 37.6| 11.32 | 0.0 | 0.0 | 20.7 | 10.35 | L1 Ridge Point: 0.21, L2 Ridge Point: 0.31, DRAM Ridge Point: 0.6 |
 
