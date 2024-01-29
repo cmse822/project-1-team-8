@@ -58,9 +58,9 @@ To your project git repo, commit your code for performing the matrix-matrix mult
 | Berk's Laptop  | 164.6               | 32.92                           | 0.0                 | 0.0                           | 0.0                 | 0.0                           | 109.6               | 32.88                         | L1 Ridge Point: 0.2 DRAM Ridge Point: 0.3     |
 | HPCC           | 53.9                | 11.32                           | 37.6                | 11.32                         | 0.0                 | 0.0                           | 20.7                | 10.35                         | L1 Ridge Point: 0.21 L2 Ridge Point: 0.31 DRAM Ridge Point: 0.6 |
 
-    In response below, obtained by running on the HPCC (See roofline.png) and Berk's personal laptop (See ERT_GRAPH_m1.png)
-    ![Roofline plot on HPPC](rooflineHPCC_Team8.png)
-    ![Roofline plot on Berk's laptop](ERT_GRAPH_m1-1.png)
+In response below, obtained by running on the HPCC (See roofline.png) and Berk's personal laptop (See ERT_GRAPH_m1.png)
+![Roofline plot on HPPC](rooflineHPCC_Team8.png)
+![Roofline plot on Berk's laptop](ERT_GRAPH_m1-1.png)
 
 4. Consider the four FP kernels in "Roofline: An Insightful Visual Performance Model for Floating-Point Programs and Multicore Architectures" (see their Table 2). Assuming the high end of operational (i.e., "arithmetic") intensity, how would these kernels perform on the platforms you are testing? What optimization strategy would you recommend to increase performance of these kernels?
 
