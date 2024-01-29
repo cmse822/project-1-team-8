@@ -52,6 +52,7 @@ To your project git repo, commit your code for performing the matrix-matrix mult
 ## Part 2: The Roofline Model
 
 3. Run the ERT in serial mode on your local machine. Report the peak performances and bandwidths (for all caches levels as well as DRAM). Where is the "ridge point" of the roofline for the various cases?
+
 | Architecture   | L1 Bandwidth (GB/s) | L1 Peak Performance (GFLOPs/s) | L2 Bandwidth (GB/s) | L2 Peak Performance (GFLOPS/s) | L3 Bandwidth (GB/s) | L3 Peak Performance (GFLOPS/s) | DRAM Bandwidth (GB/s) | DRAM Peak Performance (GFLOPS/s) | Ridge Point                                  |
 | -------------- | ------------------- | ------------------------------- | ------------------- | ------------------------------- | ------------------- | ------------------------------- | --------------------- | ----------------------------- | -------------------------------------------- |
 | Berk's Laptop  | 164.6               | 32.92                           | 0.0                 | 0.0                           | 0.0                 | 0.0                           | 109.6               | 32.88                         | L1 Ridge Point: 0.2 DRAM Ridge Point: 0.3     |
@@ -66,10 +67,8 @@ To your project git repo, commit your code for performing the matrix-matrix mult
     Information for answers to this question were found in <https://crd.lbl.gov/assets/pubs_presos/parlab08-roofline-talk.pdf>.
 
     SpMV: Relatively low arithmetic intensity (0.17 to 0.25 OI). It will be memory bound, so it won't reach the peak performance since there is irregular memory access to the source vector which makes it difficult to load. There is also a very low arithmetic intnesity (less than 0.166 flops/byte) which most likely leads to memory bound. An optimization strategy that we would recommend would be matrix compression with register blocking, as that would improve the flop:byte ratio of this kernel. The operational intensity varies from 0.17 (before block optimization) to 0.25 Flops/byte afterwards (see eec berkely ardicle posted on project directions). Additionally, bandwith limits performance, so using smaller data structures (16-bit vs. 32-bit index) and smaller for non-zero subblocks. SpMV is bound by L2 cache (37 GB/s) on the HPCC and SpMV is bandwidth bound on Berk's computer (33 GB/s). Therefore, SpMC is performing better on the HPCC.
-    #Jared Answer
 
     LBMHD: (0.70 to 1.07 OI) The roofline model for LBMHD requires huge datasets and contains more additions than multiplications which causes random access to memory. Like the SpMV, this model gets a small fraction of peak performance on uniprocessor because of the complex data structure and irregularity of memory access patterns. With the high conflict misses, vectorizing the code eliminates capacity misses. An optimization strategy that we would recommend is explicit SIMDization and cache bypass using the instruction movntpd, as this will increase the flop:byte ratio to ~1.0 on x86/Cell (compared to 0.7 flop:byte without). Additonally, the no-allocate store optimization rases intensity to 1.07. LBMHD is bandwidth bound on the HPCC at 12.2 GFlops/s and bandwidth bound on Berk's computer at 33.1 GFlops/s. Therefore, LBMHD will run faster on Berk's computer
-    #Jared Answer
 
     Stencil: (0.33 to 0.5 OI) Jacobi method, must read every point from DRAM, perform 8 flops, and then write every point back to DRAM. Cache locality is the most important factor when it comes to performance of the Stencil kernel. Performs at just over 0.5 flops/byte ideally, which is achieved by optimizing using SIMDization and cache bypass. However, Stencil can also be optimized to a 1/3 flop:byte ratio using cache blocking. Stencil is bandwidth bound on the HPCC at 12.2 GFlops/s and bandwidth bound on Berk's computer at 33.1 GFlops/s. Therefore, the stencil will run faster on Berk's computer compared to the HPCC.
     #Jacob
@@ -87,7 +86,7 @@ To your project git repo, commit your code for performing the matrix-matrix mult
     |s += A[i]_ A[i]  **1/4 flops/byte** (2 flops = 1 load, 2 operations) | Referencing the roofline plots for Berk's personal laptop, this kernel would be running at peak performance (33.1 GLOPS/s) because matrix A would not be written back to memory and scalar s would stored in the registers. Therefore, this kernel would be bandwith bound rather than memory bound. Referencing the roofline model for the HPCC, this model would be running between 5-10 GFLOPS/s depending on when the cache misses occur in the runtime of the kernel. Therefore this model would have better performance on Berk's laptop. In terms of optimization, the processing of this kernel could get faster based on the hardware that is used because it would mostly be compute bound. |
 
     #TODO Finish this problem
-    #Jared and Jacob answer
+    #Jacob answer
 
 6. Compare your results for the roofline model to what you obtained for the matrix-matrix multiplication operation from Part 1. How are the rooflines of memory bandwidth related to the features in the algorithmic performance as a function of matrix size?
     #TODO Finish this problem
