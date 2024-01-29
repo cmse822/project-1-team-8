@@ -33,7 +33,7 @@ In this first part of the project, you will test the performance of the basic ma
         Trial 2: 437.458782 Mflops/s
         Trial 3: 453.406243 Mflops/s
 
-    Peak performance = 8 performance cores _3.2 GHz_ + 2 efficiency cores _2.02_ 1 FPU = 29.64 GFlops/s 3200
+    Peak performance = 8 performance cores _3.2 GHz_ + 2 efficiency cores _2.02_ 1 FPU = 29.64 GFlops/s
 
 4. For the system you are running on, determine the clock speed of the processor and the cache size/layout. Use this information to estimate the theoretical peak performance of the system, assuming that the processor is capable of one flop per clock cycle (generally NOT true on modern architectures). How does the performance you measured in (3) compare to the theoretical peak performance of your system?
     Please see graph above.
@@ -45,6 +45,7 @@ In this first part of the project, you will test the performance of the basic ma
 
 6. How does the measured performance for multiple _N_'s compare to peak? Are there any "features" in your plot? Explain them in the context of the hardware architecture of your system. Include in your write-up a description of your system's architecture (processor, cache, etc.).
 
+    M1 Pro: 8 Performance Cores (3.2 Ghz) + 2 Efficieny cores (2.02 Ghz). During matrix multiplication, CPU utilization never reached above 40% on efficiency cores while other programs running in the background. There is a dip in the performance at N = 1950, 2000. This may be due to the cache memory limitations.
     #TODO: Finish this problem -> Chaaran Berk answer together
 
 To your project git repo, commit your code for performing the matrix-matrix multiply performance measurements, the plots of your results, and a brief write-up (in plain text or markdown) addressing the above questions and discussing your results. Pay particular attention to the comparison between different architectures and give explanations for them.
