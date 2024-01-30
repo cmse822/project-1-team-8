@@ -25,9 +25,10 @@ In this first part of the project, you will test the performance of the basic ma
 
     | Computer            | MFlops/s (avg over 3 trials) | Processor Clock Speed (GHz) | L1 cache size | L2 cache size | L3 cache size | Number of cores | Peak Performance (Gflops/s) |
     |---------------------|------------------------------|-----------------------------|---------------|---------------|---------------|-----------------|-----------------------------|
-    | Berk's Laptop       |            432.633           |             2.3             |      3.2 MB   |    12.58 MB   |      0    MB  |      8p 2e      |              29.64          |
-    | HPCC (dev-indel18)  |                              |             3.2             |      32 KB    |     1024 KB   |     28160 KB  |       20        |               48.0          |
+    | Berk's Laptop (Mac M1 Pro)      |            432.633           |             2.3             |      3.2 MB   |    12.58 MB   |      0    MB  |      8p 2e      |              29.64          |
+    | HPCC (dev-indel18)  |            #PLEASE ADD                  |             3.2             |      32 KB    |     1024 KB   |     28160 KB  |       20        |               48.0          |
 
+    #TODO: Berk, please add where you got the information for the cache sizes if aquired online
     On Berk's laptop:
         Trial 1: 407.036204 Mflops/s
         Trial 2: 437.458782 Mflops/s
@@ -42,6 +43,8 @@ In this first part of the project, you will test the performance of the basic ma
     ![N = 2500 Performance Measurements M1 Pro](performance_berk_laptop_new.png)
     ![N = 4000 Performance Measurements for HPCC dev18](performance_hpcc_intel18.png)
     #Need horizontal line for hpcc
+    
+    Notice that the performance of the Mac M1 Pro dis radically than the performance of the HPCC. This is due to the unique architechture of the M1 compared to the HPCC and non-M1 computers. Since Apple designed a chip that integrates COU, GPU, Neural Engine, I/O onto one chip, it is able to have sustained performance wheras the HPCC has steeper decline in performance.
 
 6. How does the measured performance for multiple _N_'s compare to peak? Are there any "features" in your plot? Explain them in the context of the hardware architecture of your system. Include in your write-up a description of your system's architecture (processor, cache, etc.).
 
@@ -56,12 +59,14 @@ To your project git repo, commit your code for performing the matrix-matrix mult
 
 | Architecture   | L1 Bandwidth (GB/s) | L1 Peak Performance (GFLOPs/s) | L2 Bandwidth (GB/s) | L2 Peak Performance (GFLOPS/s) | L3 Bandwidth (GB/s) | L3 Peak Performance (GFLOPS/s) | DRAM Bandwidth (GB/s) | DRAM Peak Performance (GFLOPS/s) | Ridge Point                                  |
 | -------------- | ------------------- | ------------------------------- | ------------------- | ------------------------------- | ------------------- | ------------------------------- | --------------------- | ----------------------------- | -------------------------------------------- |
-| Berk's Laptop  | 164.6               | 32.92                           | 0.0                 | 0.0                           | 0.0                 | 0.0                           | 109.6               | 32.88                         | L1 Ridge Point: 0.2 DRAM Ridge Point: 0.3     |
-| HPCC           | 53.9                | 11.32                           | 37.6                | 11.32                         | 0.0                 | 0.0                           | 20.7                | 10.35                         | L1 Ridge Point: 0.21 L2 Ridge Point: 0.31 DRAM Ridge Point: 0.6 |
+| Berk's Laptop (Mac M1 Pro)  | 164.6               | 32.92                           | 0.0                 | 0.0                           | 0.0                 | 0.0                           | 109.6               | 32.88                         | L1 Ridge Point: 0.2 DRAM Ridge Point: 0.3     |
+| HPCC (dev-indel18)          | 53.9                | 11.32                           | 37.6                | 11.32                         | 0.0                 | 0.0                           | 20.7                | 10.35                         | L1 Ridge Point: 0.21 L2 Ridge Point: 0.31 DRAM Ridge Point: 0.6 |
 
 In response below, obtained by running on the HPCC (See roofline.png) and Berk's personal laptop (See ERT_GRAPH_m1.png)
 ![Roofline plot on HPPC](rooflineHPCC_Team8.png)
-![Roofline plot on Berk's laptop](ERT_GRAPH_m1-1.png)
+![Roofline plot on Mac M1 Pro](ERT_GRAPH_m1-1.png)
+
+Notice that there is no L3 cache listed on the roofline model for the HPCC. That is because the software has a difficult time distingishing the memory allocation of DRAM and L3. Therefore, the software treats L3 and DRAM as equivalent. The same is true for the M1 pro. Since the software shows that the L2 is indistinguishable from L1 and DRAM, it grouped L2 into DRAM which and did not label L2 on the roofline model graph. 
 
 4. Consider the four FP kernels in "Roofline: An Insightful Visual Performance Model for Floating-Point Programs and Multicore Architectures" (see their Table 2). Assuming the high end of operational (i.e., "arithmetic") intensity, how would these kernels perform on the platforms you are testing? What optimization strategy would you recommend to increase performance of these kernels?
 
