@@ -3,11 +3,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 from collections import defaultdict
 import scipy.stats as st
+from mpl_toolkits.axes_grid1 import make_axes_locatable
 
-path = r"./matrix_multiplication_berk.csv"
+path = "./output/float_updated.csv"
 data = pd.read_csv(path)
-plot_name = 'performance_berk_laptop'
+plot_name = 'performance_berk_laptop_with_peak'
 use_time = True
+peak_perf = 2.02
+plot_title = 'M1 Pro (Darwin Kernel Version 23.1.0 | Arm64) Performace'
 
 mflops_s_data = defaultdict(list)
 
@@ -42,14 +45,19 @@ for n, perf_data in mflops_s_data.items():
     ci_highs.append(ci_high)
 
 # Plot the line
-plt.plot(x, means, label='Mean')
-# plt.hlines(y=2020, xmin=0, xmax=x_max, colors="r", label="Max Perf.")
+fig, ax = plt.subplots()
+
+ax.plot(x, means, label='Mean')
+
 # Plot the confidence interval as a shaded area
-plt.fill_between(x, ci_lows, ci_highs, color='gray', alpha=0.3, label='95% Confidence Interval')
+ax.fill_between(x, ci_lows, ci_highs, color='gray', alpha=0.3, label='95% Confidence Interval')
+
+# Add a horizontal line at peak performance
+ax.axhline(y=peak_perf, color='red', label='Peak Perf')
 
 plt.xlabel('N')
 plt.ylabel('GFLOPs/s')
-plt.title('M1 Pro (Darwin Kernel Version 23.1.0 | Arm64) Performance')
+plt.title(plot_title)
 plt.legend()
 
 plt.savefig(f'{plot_name}.png')
