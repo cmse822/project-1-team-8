@@ -49,7 +49,7 @@ plt.fill_between(x, ci_lows, ci_highs, color='gray', alpha=0.3, label='95% Confi
 
 plt.xlabel('N')
 plt.ylabel('GFLOPs/s')
-plt.title('M1 Pro Performance')
+plt.title('M1 Pro (Darwin Kernel Version 23.1.0 | Arm64) Performance')
 plt.legend()
 
 plt.savefig(f'{plot_name}.png')

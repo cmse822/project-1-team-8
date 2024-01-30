@@ -15,10 +15,10 @@
 
 
 float** generate_matrix(int size) {
-    float** matrix = (float**)malloc(size * sizeof(int*));
+    float** matrix = (float**)malloc(size * sizeof(float*));
     
     for (int i = 0; i < size; i++) {
-        matrix[i] = (float*)malloc(size * sizeof(int));
+        matrix[i] = (float*)malloc(size * sizeof(float));
     }
 
     // Random seed for number generation
@@ -36,6 +36,27 @@ float** generate_matrix(int size) {
 
 }
 
+float **generate_offset_matrix(int size)
+{
+    float *matrix = (float *)malloc(size * size * sizeof(float *));
+    int offset = size - 1;
+
+    // Random seed for number generation
+    srand(time(0));
+
+    // Fill the matrix with random numbers
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = 0; j < size; j++)
+        {
+            // matrix[i][j] = rand() % 100; // Adjust the range
+            int idx = i * offset + j;
+            matrix[idx] = (float)rand() / (float)(RAND_MAX);
+        }
+    }
+
+    return matrix;
+}
 
 // The function below is made to print the elements of the nxn matrix
 void print_matrix(float** matrix, int size) {
@@ -48,13 +69,14 @@ void print_matrix(float** matrix, int size) {
 }
 
 // Function that multiplies matrix_a and matrix_b. Then adds the product to elements in matrix_c
-static float** multiply_matrices(float** matrix_a, float** matrix_b, float** matrix_c, int size) {
+static float** multiply_matrices(float* matrix_a, float* matrix_b, float* matrix_c, int size) {
     // From first example in HPSC textbook page 49
+    int offset = size - 1;
     for (int idx = 0; idx < size; idx++){
         for (int idy = 0; idy < size; idy++){
             for (int idz = 0; idz < size; idz++){
                 // TODO: Make sure c is updated accordingly.
-                matrix_c[idx][idy] += matrix_a[idx][idz] * matrix_b[idz][idy];
+                matrix_c[idx * offset + idy] += matrix_a[idx * offset + idz] * matrix_b[idz * offset + idy];
             }
         }
     }
@@ -64,11 +86,11 @@ static float** multiply_matrices(float** matrix_a, float** matrix_b, float** mat
 
 // Function that frees memory for matrix_a, matrix_b, and matrix_c
 void free_matrix_memory(float** matrix_a, float**matrix_b, float** matrix_c, int size) {
-    for (int i = 0; i < size; i++) {
-        free(matrix_a[i]);
-        free(matrix_b[i]);
-        free(matrix_c[i]);
-    }
+    // for (int i = 0; i < size; i++) {
+    //     free(matrix_a[i]);
+    //     free(matrix_b[i]);
+    //     free(matrix_c[i]);
+    // }
     free(matrix_a);
     free(matrix_b);
     free(matrix_c);
@@ -85,7 +107,7 @@ int main() {
 
 
     // Open the CSV file for writing
-    FILE *csvFile = fopen("matrix_multiplication_team_8.csv", "w");
+    FILE *csvFile = fopen("float_updated.csv", "w");
 
     if (csvFile == NULL) {
         fprintf(stderr, "Error opening file.\n");
@@ -108,9 +130,9 @@ int main() {
         for (int trial = 1; trial <= num_trials; trial++) {
             printf("              trial num: %d \n", trial);
             // Create randomly generated matrices
-            float** matrix_a = generate_matrix(size);
-            float** matrix_b = generate_matrix(size);
-            float** matrix_c = generate_matrix(size);
+            float **matrix_a = generate_offset_matrix(size);
+            float **matrix_b = generate_offset_matrix(size);
+            float **matrix_c = generate_offset_matrix(size);
 
             // Clock time to measure multipy_matrices time
             struct timeval startTime, endTime;
