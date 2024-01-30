@@ -43,8 +43,8 @@ In this first part of the project, you will test the performance of the basic ma
     ![N = 2500 Performance Measurements M1 Pro](performance_berk_laptop_new.png)
     ![N = 4000 Performance Measurements for HPCC dev18](performance_hpcc_intel18.png)
     #Need horizontal line for hpcc
-    
-    Notice that the performance of the Mac M1 Pro dis radically than the performance of the HPCC. This is due to the unique architechture of the M1 compared to the HPCC and non-M1 computers. Since Apple designed a chip that integrates COU, GPU, Neural Engine, I/O onto one chip, it is able to have sustained performance wheras the HPCC has steeper decline in performance.
+
+    Notice that the performance of the Mac M1 Pro dis radically than the performance of the HPCC. This is due to the unique architechture of the M1 compared to the HPCC and non-M1 computers. Since Apple designed a chip that integrates COU, GPU, Neural Engine, I/O onto one chip, it is able to have sustained performance wheras the HPCC has steeper decline in performance. Another possible explaination could be the implementation of SIMD (single insruction multile data) because it's built into the the M1 chip. Also, the M1 has fused multiply-add instructions (FMA) which saves time and gives better run times. Source for M1 information (https://eclecticlight.co/2021/08/06/accelerating-the-m1-mac-an-introduction-to-simd/, https://www.apple.com/macbook-air-m1/).
 
 6. How does the measured performance for multiple _N_'s compare to peak? Are there any "features" in your plot? Explain them in the context of the hardware architecture of your system. Include in your write-up a description of your system's architecture (processor, cache, etc.).
 
@@ -67,6 +67,7 @@ In response below, obtained by running on the HPCC (See roofline.png) and Berk's
 ![Roofline plot on Mac M1 Pro](ERT_GRAPH_m1-1.png)
 
 Notice that there is no L3 cache listed on the roofline model for the HPCC. That is because the software has a difficult time distingishing the memory allocation of DRAM and L3. Therefore, the software treats L3 and DRAM as equivalent. The same is true for the M1 pro. Since the software shows that the L2 is indistinguishable from L1 and DRAM, it grouped L2 into DRAM which and did not label L2 on the roofline model graph. 
+Additionally, the peak performance for the HPCC is different by a factor of four when compared to the calculated and computed values. This is due to GNUplot not vectorizing our program. Since there are four threads per core on dev node 18, our program was running on only one thread which makes our peak performance off by a factor of four.
 
 4. Consider the four FP kernels in "Roofline: An Insightful Visual Performance Model for Floating-Point Programs and Multicore Architectures" (see their Table 2). Assuming the high end of operational (i.e., "arithmetic") intensity, how would these kernels perform on the platforms you are testing? What optimization strategy would you recommend to increase performance of these kernels?
 
