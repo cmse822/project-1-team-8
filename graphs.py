@@ -14,7 +14,7 @@ for idx, row in data.iterrows():
     n = row['N']
 
     if row['Performance'] != np.inf:
-        mflops_s_data[n].append(row['Performance'])
+        mflops_s_data[n].append(row['Performance'] / 10 ** 3)
 
 x = []
 means = []
@@ -36,7 +36,7 @@ plt.hlines(y=2020, xmin=0, xmax=x_max, colors="r", label="Max Perf.")
 plt.fill_between(x, ci_lows, ci_highs, color='gray', alpha=0.3, label='95% Confidence Interval')
 
 plt.xlabel('N')
-plt.ylabel('MFLOPs/s')
+plt.ylabel('GFLOPs/s')
 plt.title('M1 Pro Performance')
 plt.legend()
 
