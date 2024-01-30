@@ -4,9 +4,9 @@ import matplotlib.pyplot as plt
 from collections import defaultdict
 import scipy.stats as st
 
-path = r"/Users/berkatik/Desktop/Courses/CMSE822 - Parallel computing/Assignments/project-1-team-8/matrix_multiplication_berk.csv"
+path = r"/Users/berkatik/Desktop/Courses/CMSE822 - Parallel computing/Assignments/project-1-team-8/output/float_updated.csv"
 data = pd.read_csv(path)
-plot_name = 'performance_berk_laptop'
+plot_name = 'performance_berk_laptop_new'
 
 mflops_s_data = defaultdict(list)
 
@@ -31,7 +31,7 @@ for n, perf_data in mflops_s_data.items():
 
 # Plot the line
 plt.plot(x, means, label='Mean')
-plt.hlines(y=2020, xmin=0, xmax=x_max, colors="r", label="Max Perf.")
+plt.hlines(y=2.020, xmin=0, xmax=x_max, colors="r", label="Max Perf.")
 # Plot the confidence interval as a shaded area
 plt.fill_between(x, ci_lows, ci_highs, color='gray', alpha=0.3, label='95% Confidence Interval')
 

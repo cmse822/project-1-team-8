@@ -39,7 +39,7 @@ In this first part of the project, you will test the performance of the basic ma
     Please see graph above.
 5. Now repeat the performance measurement for a range of matrix size `N` from 1 to 10,000,000. Make a plot of the resulting measured Gflop/s vs. `N`. On this plot place a horizontal line representing the theoretical peak performance based upon your system's clock speed.
 
-    ![N = 2500 Performance Measurements M1 Pro](performance_berk_laptop.png)
+    ![N = 2500 Performance Measurements M1 Pro](performance_berk_laptop_new.png)
     ![N = 4000 Performance Measurements for HPCC dev18](performance_hpcc_intel18.png)
     #Need horizontal line for hpcc
 
