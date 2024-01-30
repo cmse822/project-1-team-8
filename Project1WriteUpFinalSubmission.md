@@ -28,7 +28,8 @@ In this first part of the project, you will test the performance of the basic ma
     | Berk's Laptop (Mac M1 Pro)      |            432.633           |             2.3             |      3.2 MB   |    12.58 MB   |      0    MB  |      8p 2e      |              29.64          |
     | HPCC (dev-indel18)  |            #PLEASE ADD                  |             3.2             |      32 KB    |     1024 KB   |     28160 KB  |       20        |               48.0          |
 
-    #TODO: Berk, please add where you got the information for the cache sizes if aquired online
+    Cache sizes for M1 Mac were acquired from `sysctl` command.
+    
     On Berk's laptop:
         Trial 1: 407.036204 Mflops/s
         Trial 2: 437.458782 Mflops/s
@@ -47,11 +48,11 @@ In this first part of the project, you will test the performance of the basic ma
     Notice that the performance of the Mac M1 Pro dis radically than the performance of the HPCC. This is due to the unique architechture of the M1 compared to the HPCC and non-M1 computers. Since Apple designed a chip that integrates CPU, GPU, Neural Engine, I/O onto one chip, it is able to have sustained performance wheras the HPCC has steeper decline in performance. Another possible explaination could be the implementation of SIMD (single insruction multile data) because it's built into the the M1 chip. Also, the M1 has fused multiply-add instructions (FMA) which saves time and gives better run times. Source for M1 information (https://eclecticlight.co/2021/08/06/accelerating-the-m1-mac-an-introduction-to-simd/, https://www.apple.com/macbook-air-m1/).
      It may also be the Apple Matrix CoProcessor showing its power. This coprocessor, included in the M1 SoC, is designed to accelerate operations like matrix multiplication. Together with the unified memory architecture, the integration of specialized hardware may contribute to more consistent performance. Source
 (https://github.com/corsix/amx/tree/main)
-     TODO: @Berk add the explanation on the update for matrix allocation and its effect on m1
+    In the figures for M1 above, you can see the performance difference for using 2D arrays in comparison to 1D offset arrays. Using 1D array for matrix multiplication eliminated the performance dip we were experiencing around N = 2000.
 
 7. How does the measured performance for multiple _N_'s compare to peak? Are there any "features" in your plot? Explain them in the context of the hardware architecture of your system. Include in your write-up a description of your system's architecture (processor, cache, etc.).
 
-    M1 Pro: 8 Performance Cores (3.2 Ghz) + 2 Efficieny cores (2.02 Ghz). During matrix multiplication, CPU utilization never reached above 40% on efficiency cores while other programs running in the background. There is a dip in the performance at N = 1950, 2000. This may be due to the cache memory limitations.
+    M1 Pro: 8 Performance Cores (3.2 Ghz) + 2 Efficieny cores (2.02 Ghz). During matrix multiplication, CPU utilization never reached above 40% on efficiency cores while other programs running in the background. There is a dip in the performance at N = 1950, 2000. This may be due to the cache memory limitations. 
     #TODO: Finish this problem -> Chaaran Berk answer together
 
 To your project git repo, commit your code for performing the matrix-matrix multiply performance measurements, the plots of your results, and a brief write-up (in plain text or markdown) addressing the above questions and discussing your results. Pay particular attention to the comparison between different architectures and give explanations for them.
