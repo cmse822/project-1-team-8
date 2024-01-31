@@ -61,9 +61,7 @@ In this first part of the project, you will test the performance of the basic ma
     ![N = 4000 Performance Measurements for HPCC dev18](performance_hpcc_intel_18.png)
 
     Maximum square matrix size that could be held in:
-    L1 cache - 90
-    L2 cache - 512
-    L3 cache - 2684
+    L1 cache - 90, L2 cache - 512, L3 cache - 2684.
 
     No value of 'N' reaches the peak performance, which represents that matrix multiplication operation is memory bound. 
     
@@ -115,8 +113,10 @@ Additionally, the peak performance for the HPCC is different by a factor of four
     | Y[i] = A[i] + C*B[i] **1/12 flops/byte** (2/3 flops = 2 loads, 1 store, 2 operations) | This kernel is similar to the first kernel in the warmup because the kernel is computationaly taxing with multiple loads of vectors A and B as well as a store of vector Y. This kernel will have many cache misses due to having to load vectors A and B, but not as much as the first warmup kernel. If we are to assume that most of these loads will be done from DRAM due to the amount of cache misses, then we can also assume that many operations will be loading from DRAM. This allows us to draw the same conclusion that this kernel will run faster on Berk's laptop than the HPCC due to the results that we've seen in the roofline model and mentioned in the first kernel of the warmup above. As for optimization strategies, we'd once again recommend blocking parts of vectors A and B to limit cache misses. This would also entail explicit SIMDization and cache bypass use the instruction movntpd to deal with quickly filled cache memory and small memory efficiency. |
 
 6. Compare your results for the roofline model to what you obtained for the matrix-matrix multiplication operation from Part 1. How are the rooflines of memory bandwidth related to the features in the algorithmic performance as a function of matrix size?
-    While running the matrix multiplication with M1, we noticed a sudden drop in performance around N = 2000. However, this problem was resolved when we switched our memory allocation for the matrices from 2D arrays to offset based 1D arrays. We predict that during the 2D array allocation, since the child arrays inside the matrices can be placed at the different parts of the memory, some parts of the array may be stored in DRAM which causes the drop. During the 1D array allocation run, we did not observe the same problem this can be cause because memory allocation of this array is done linearly, this way all parts of the matrices are in the same memory partition.
-    #TODO Finish this problem
-    #Talk over slack when this is done
+    Berk's Laptop:
 
-To your project write-up, add your plots of the roofline model for the systems you tested, and responses addressing the above questions.
+    While running the matrix multiplication with M1, we noticed a sudden drop in performance around N = 2000. However, this problem was resolved when we switched our memory allocation for the matrices from 2D arrays to offset based 1D arrays. We predict that during the 2D array allocation, since the child arrays inside the matrices can be placed at the different parts of the memory, some parts of the array may be stored in DRAM which causes the drop. During the 1D array allocation run, we did not observe the same problem this can be cause because memory allocation of this array is done linearly, this way all parts of the matrices are in the same memory partition.
+    
+    HPCC Intel 18:
+
+    The performance obtained from Part 1 seems to be in agreement with the Roofline model obatined for the machine. Initially, when the size is small (20 - 100), most of them fit in L1 and achieve maximum performance. Then when L1 is filled, there is a steady decline in performance as now they are bound by L2 bandwidth. This decline steadies, once matrices start fitting in L2 and a bit more since not a lot of data transfer needs to happen initially, when the matrices do not fit in L2. Then, when the data that needs to transferred increases, at around size of 1500, there is a similar decline the operation is now bound by DRAM and this one too steadies like before, as the matrix size keeps on increasing and the data that needs to transferred increases.  
