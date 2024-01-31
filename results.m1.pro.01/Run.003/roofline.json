@@ -1,0 +1,74 @@
+{
+   "empirical": {
+      "metadata": {},
+      "gflops": {
+         "data": [
+            [
+               "FP64 GFLOPs",
+               33.07
+            ]
+         ],
+         "metadata": {
+            "": [
+               "META_DATA",
+               "FLOPS          16",
+               "ERT_VERSION  1.1.0",
+               "HOSTNAME  ('berks-mbp.attlocal.net', ['80.1.168.192.in-addr.arpa'], ['192.168.1.80'])",
+               "UNAME  uname_result(system='Darwin', node='Berks-MBP.attlocal.net', release='23.1.0', version='Darwin Kernel Version 23.1.0: Mon Oct  9 21:27:24 PDT 2023; root:xnu-10002.41.9~6/RELEASE_ARM64_T6000', machine='arm64')",
+               "TIMESTAMP_DATA  1706030514.141988",
+               "CONFIG  {'ERT_RESULTS': ['results.m1.pro.01'], 'ERT_DRIVER': ['driver1'], 'ERT_KERNEL': ['kernel1'], 'ERT_SPEC_GBYTES_DRAM': ['243'], 'ERT_SPEC_GFLOPS': ['29.73'], 'ERT_FLOPS': ['1,2,4,8,16'], 'ERT_ALIGN': ['64'], 'ERT_CC': ['clang'], 'ERT_CFLAGS': ['-O3', '-std=gnu++11'], 'ERT_LD': ['clang'], 'ERT_LDFLAGS': [], 'ERT_LDLIBS': [], 'ERT_PRECISION': ['FP64'], 'ERT_RUN': ['export', 'OMP_NUM_THREADS=1;', 'export', 'OMP_PROC_BIND=false;', 'export', 'OMP_PLACES=threads;', 'mpirun', '-np', '1', 'ERT_CODE'], 'ERT_NUM_EXPERIMENTS': ['5'], 'ERT_MEMORY_MAX': ['1073741824'], 'ERT_WORKING_SET_MIN': ['1'], 'ERT_TRIALS_MIN': ['1'], 'ERT_GNUPLOT': ['gnuplot'], 'ERT_MPI': [False], 'ERT_OPENMP': [False], 'ERT_GPU': [False], 'ERT_HIP': [False], 'ERT_OCL': [False], 'ERT_SYCL': [False], 'ERT_WSS_MULT': [1.1]}",
+               "TIMESTAMP_DATA  1706030549.576258",
+               "TIMESTAMP_DATA  1706030584.113646",
+               "TIMESTAMP_DATA  1706030618.933963",
+               "TIMESTAMP_DATA  1706030653.294066"
+            ],
+            "TIMESTAMP_DB": 1706030688.356398
+         }
+      },
+      "gbytes": {
+         "data": [
+            [
+               "L1",
+               164.58
+            ],
+            [
+               "DRAM",
+               109.62
+            ]
+         ],
+         "metadata": {
+            "": [
+               "FLOPS          2",
+               "ERT_VERSION  1.1.0",
+               "HOSTNAME  ('berks-mbp.attlocal.net', ['80.1.168.192.in-addr.arpa'], ['192.168.1.80'])",
+               "UNAME  uname_result(system='Darwin', node='Berks-MBP.attlocal.net', release='23.1.0', version='Darwin Kernel Version 23.1.0: Mon Oct  9 21:27:24 PDT 2023; root:xnu-10002.41.9~6/RELEASE_ARM64_T6000', machine='arm64')",
+               "TIMESTAMP_DATA  1706030251.960553",
+               "CONFIG  {'ERT_RESULTS': ['results.m1.pro.01'], 'ERT_DRIVER': ['driver1'], 'ERT_KERNEL': ['kernel1'], 'ERT_SPEC_GBYTES_DRAM': ['243'], 'ERT_SPEC_GFLOPS': ['29.73'], 'ERT_FLOPS': ['1,2,4,8,16'], 'ERT_ALIGN': ['64'], 'ERT_CC': ['clang'], 'ERT_CFLAGS': ['-O3', '-std=gnu++11'], 'ERT_LD': ['clang'], 'ERT_LDFLAGS': [], 'ERT_LDLIBS': [], 'ERT_PRECISION': ['FP64'], 'ERT_RUN': ['export', 'OMP_NUM_THREADS=1;', 'export', 'OMP_PROC_BIND=false;', 'export', 'OMP_PLACES=threads;', 'mpirun', '-np', '1', 'ERT_CODE'], 'ERT_NUM_EXPERIMENTS': ['5'], 'ERT_MEMORY_MAX': ['1073741824'], 'ERT_WORKING_SET_MIN': ['1'], 'ERT_TRIALS_MIN': ['1'], 'ERT_GNUPLOT': ['gnuplot'], 'ERT_MPI': [False], 'ERT_OPENMP': [False], 'ERT_GPU': [False], 'ERT_HIP': [False], 'ERT_OCL': [False], 'ERT_SYCL': [False], 'ERT_WSS_MULT': [1.1]}",
+               "TIMESTAMP_DATA  1706030266.119328",
+               "TIMESTAMP_DATA  1706030280.100759",
+               "TIMESTAMP_DATA  1706030294.125731",
+               "TIMESTAMP_DATA  1706030308.1290529"
+            ],
+            "TIMESTAMP_DB": 1706030688.3565361
+         }
+      }
+   },
+   "spec": {
+      "gflops": {
+         "data": [
+            [
+               "GFLOPs",
+               29.73
+            ]
+         ]
+      },
+      "gbytes": {
+         "data": [
+            [
+               "DRAM",
+               243.0
+            ]
+         ]
+      }
+   }
+}
