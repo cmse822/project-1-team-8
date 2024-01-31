@@ -26,7 +26,7 @@ In this first part of the project, you will test the performance of the basic ma
     | Computer            | MFlops/s (avg over 3 trials) | Processor Clock Speed (GHz) | L1 cache size | L2 cache size | L3 cache size | Number of cores | Peak Performance (Gflops/s) |
     |---------------------|------------------------------|-----------------------------|---------------|---------------|---------------|-----------------|-----------------------------|
     | Berk's Laptop (Mac M1 Pro)      |            432.633           |             2.3             |      3.2 MB   |    12.58 MB   |      0    MB  |      8p 2e      |              29.64          |
-    | HPCC (dev-indel18)  |            #PLEASE ADD                  |             3.2             |      32 KB    |     1024 KB   |     28160 KB  |       20        |               48.0          |
+    | HPCC (dev-indel18)  |            688.264                  |             3.2             |      32 KB    |     1024 KB   |     28160 KB  |       20        |               48.0          |
 
     #TODO: Berk, please add where you got the information for the cache sizes if aquired online
     On Berk's laptop:
@@ -37,19 +37,32 @@ In this first part of the project, you will test the performance of the basic ma
     Peak performance = 8 performance cores _3.2 GHz_ + 2 efficiency cores _2.02_ 1 FPU = 29.64 GFlops/s
 
 4. For the system you are running on, determine the clock speed of the processor and the cache size/layout. Use this information to estimate the theoretical peak performance of the system, assuming that the processor is capable of one flop per clock cycle (generally NOT true on modern architectures). How does the performance you measured in (3) compare to the theoretical peak performance of your system?
-    Please see graph above.
+    Please see table above in (3).
 5. Now repeat the performance measurement for a range of matrix size `N` from 1 to 10,000,000. Make a plot of the resulting measured Gflop/s vs. `N`. On this plot place a horizontal line representing the theoretical peak performance based upon your system's clock speed.
     ![N = 2500 Performance Measurements M1 Pro (1D Offset Matrix)](performance_berk_laptop_new.png)
-    ![N = 2500 Performance Measurements M1 Pro (2D Matrix)](performance_berk_laptop.png)
-    ![N = 4000 Performance Measurements for HPCC dev18](performance_hpcc_intel18.png)
-    #Need horizontal line for hpcc
+    ![N = 2500 Performance Measurements M1 Pro (2D Matrix) with peak](performance_berk_laptop_with_peak.png)
+    ![N = 4000 Performance Measurements for HPCC dev18 with peak](performance_hpcc_intel18_with_peak.png)
 
-    Notice that the performance of the Mac M1 Pro dis radically than the performance of the HPCC. This is due to the unique architechture of the M1 compared to the HPCC and non-M1 computers. Since Apple designed a chip that integrates CPU, GPU, Neural Engine, I/O onto one chip, it is able to have sustained performance wheras the HPCC has steeper decline in performance. Another possible explaination could be the implementation of SIMD (single insruction multile data) because it's built into the the M1 chip. Also, the M1 has fused multiply-add instructions (FMA) which saves time and gives better run times. Source for M1 information (https://eclecticlight.co/2021/08/06/accelerating-the-m1-mac-an-introduction-to-simd/, https://www.apple.com/macbook-air-m1/).
-     TODO: @Berk add the explanation on the update for matrix allocation and its effect on m1
+    (Theoretical peak performances per core are used.)
+
+    Notice that the performance of the Mac M1 Pro dis radically than the performance of the HPCC. This is due to the unique architechture of the M1 compared to the HPCC and non-M1 computers. Since Apple designed a chip that integrates CPU, GPU, Neural Engine, I/O onto one chip, it is able to have sustained performance wheras the HPCC has steeper decline in performance. Another possible explaination could be the implementation of SIMD (single insruction multiple data) because it's built into the the M1 chip. Also, the M1 has fused multiply-add instructions (FMA) which saves time and gives better run times. Source for M1 information (https://eclecticlight.co/2021/08/06/accelerating-the-m1-mac-an-introduction-to-simd/, https://www.apple.com/macbook-air-m1/).
 
 6. How does the measured performance for multiple _N_'s compare to peak? Are there any "features" in your plot? Explain them in the context of the hardware architecture of your system. Include in your write-up a description of your system's architecture (processor, cache, etc.).
 
+    ![N = 2500 Performance Measurements M1 Pro (2D Matrix)](performance_berk_laptop.png)
     M1 Pro: 8 Performance Cores (3.2 Ghz) + 2 Efficieny cores (2.02 Ghz). During matrix multiplication, CPU utilization never reached above 40% on efficiency cores while other programs running in the background. There is a dip in the performance at N = 1950, 2000. This may be due to the cache memory limitations.
+
+    Performance in HPCC:
+
+    ![N = 4000 Performance Measurements for HPCC dev18](performance_hpcc_intel18.png)
+
+    Maximum square matrix size that could be held in:
+    L1 cache - 90
+    L2 cache - 512
+    L3 cache - 2684
+
+    No value of 'N' reaches the peak performance, which represents that matrix multiplication operation is memory bound. 
+
     #TODO: Finish this problem -> Chaaran Berk answer together
 
 To your project git repo, commit your code for performing the matrix-matrix multiply performance measurements, the plots of your results, and a brief write-up (in plain text or markdown) addressing the above questions and discussing your results. Pay particular attention to the comparison between different architectures and give explanations for them.

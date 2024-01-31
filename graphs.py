@@ -5,12 +5,12 @@ from collections import defaultdict
 import scipy.stats as st
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
-path = "./output/float_updated.csv"
+path = "./matrix_multiplication_team_8_hpcc.csv"
 data = pd.read_csv(path)
-plot_name = 'performance_berk_laptop_with_peak'
+plot_name = 'performance_hpcc_intel_18'
 use_time = True
-peak_perf = 2.02
-plot_title = 'M1 Pro (Darwin Kernel Version 23.1.0 | Arm64) Performace'
+peak_perf = 2.4
+plot_title = 'HPCC cluster Intel 18 performance'
 
 mflops_s_data = defaultdict(list)
 
