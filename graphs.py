@@ -11,6 +11,7 @@ plot_name = 'performance_hpcc_intel_18'
 use_time = True
 peak_perf = 2.4
 plot_title = 'HPCC cluster Intel 18 performance'
+draw_peak = False
 
 mflops_s_data = defaultdict(list)
 
@@ -53,7 +54,8 @@ ax.plot(x, means, label='Mean')
 ax.fill_between(x, ci_lows, ci_highs, color='gray', alpha=0.3, label='95% Confidence Interval')
 
 # Add a horizontal line at peak performance
-ax.axhline(y=peak_perf, color='red', label='Peak Perf')
+if draw_peak:
+    ax.axhline(y=peak_perf, color='red', label='Peak Perf')
 
 plt.xlabel('N')
 plt.ylabel('GFLOPs/s')
