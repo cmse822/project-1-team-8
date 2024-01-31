@@ -42,7 +42,7 @@ In this first part of the project, you will test the performance of the basic ma
 5. Now repeat the performance measurement for a range of matrix size `N` from 1 to 10,000,000. Make a plot of the resulting measured Gflop/s vs. `N`. On this plot place a horizontal line representing the theoretical peak performance based upon your system's clock speed.
     ![N = 2500 Performance Measurements M1 Pro (1D Offset Matrix)](performance_berk_laptop_new.png)
     ![N = 2500 Performance Measurements M1 Pro (2D Matrix) with peak](performance_berk_laptop_with_peak.png)
-    ![N = 4000 Performance Measurements for HPCC dev18 with peak](performance_hpcc_intel18_with_peak.png)
+    ![N = 4000 Performance Measurements for HPCC dev18 with peak](performance_hpcc_intel_18_with_peak.png)
 
     (Theoretical peak performances per core are used.)
 
@@ -58,7 +58,7 @@ In this first part of the project, you will test the performance of the basic ma
 
     Performance in HPCC:
 
-    ![N = 4000 Performance Measurements for HPCC dev18](performance_hpcc_intel18.png)
+    ![N = 4000 Performance Measurements for HPCC dev18](performance_hpcc_intel_18.png)
 
     Maximum square matrix size that could be held in:
     L1 cache - 90
@@ -66,8 +66,12 @@ In this first part of the project, you will test the performance of the basic ma
     L3 cache - 2684
 
     No value of 'N' reaches the peak performance, which represents that matrix multiplication operation is memory bound. 
+    
+    Initially, there is a steep increase, since the loading time is the predominant factor for arrays of very small size and when the FLOPs increase with the size of the matrix and the loading time remains almost same. These achieve the highest performance, as they fit in L1.
 
-    #TODO: Finish this problem -> Chaaran Berk answer together
+    Once the L1 fills up, there is a decrease in performance and it steadies once the matrix size fits in L2 (upto around 1500).
+
+    Then, there is a similar decline, which could attribute to the data being not able to fit in L2 and fitting in L3 and eventually the DRAM.
 
 To your project git repo, commit your code for performing the matrix-matrix multiply performance measurements, the plots of your results, and a brief write-up (in plain text or markdown) addressing the above questions and discussing your results. Pay particular attention to the comparison between different architectures and give explanations for them.
 
