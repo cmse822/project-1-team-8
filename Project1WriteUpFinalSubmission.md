@@ -28,7 +28,8 @@ In this first part of the project, you will test the performance of the basic ma
     | Berk's Laptop (Mac M1 Pro)      |            432.633           |             2.3             |      3.2 MB   |    12.58 MB   |      0    MB  |      8p 2e      |              29.64          |
     | HPCC (dev-indel18)  |            688.264                  |             3.2             |      32 KB    |     1024 KB   |     28160 KB  |       20        |               48.0          |
 
-    #TODO: Berk, please add where you got the information for the cache sizes if aquired online
+    Cache sizes for M1 Mac were acquired from `sysctl` command.
+
     On Berk's laptop:
         Trial 1: 407.036204 Mflops/s
         Trial 2: 437.458782 Mflops/s
@@ -45,9 +46,12 @@ In this first part of the project, you will test the performance of the basic ma
 
     (Theoretical peak performances per core are used.)
 
-    Notice that the performance of the Mac M1 Pro dis radically than the performance of the HPCC. This is due to the unique architechture of the M1 compared to the HPCC and non-M1 computers. Since Apple designed a chip that integrates CPU, GPU, Neural Engine, I/O onto one chip, it is able to have sustained performance wheras the HPCC has steeper decline in performance. Another possible explaination could be the implementation of SIMD (single insruction multiple data) because it's built into the the M1 chip. Also, the M1 has fused multiply-add instructions (FMA) which saves time and gives better run times. Source for M1 information (https://eclecticlight.co/2021/08/06/accelerating-the-m1-mac-an-introduction-to-simd/, https://www.apple.com/macbook-air-m1/).
+    Notice that the performance of the Mac M1 Pro dis radically than the performance of the HPCC. This is due to the unique architechture of the M1 compared to the HPCC and non-M1 computers. Since Apple designed a chip that integrates CPU, GPU, Neural Engine, I/O onto one chip, it is able to have sustained performance wheras the HPCC has steeper decline in performance. Another possible explaination could be the implementation of SIMD (single insruction multile data) because it's built into the the M1 chip. Also, the M1 has fused multiply-add instructions (FMA) which saves time and gives better run times. Source for M1 information (<https://eclecticlight.co/2021/08/06/accelerating-the-m1-mac-an-introduction-to-simd/>, <https://www.apple.com/macbook-air-m1/>).
+     It may also be the Apple Matrix CoProcessor showing its power. This coprocessor, included in the M1 SoC, is designed to accelerate operations like matrix multiplication. Together with the unified memory architecture, the integration of specialized hardware may contribute to more consistent performance. Source
+(<https://github.com/corsix/amx/tree/main>)
+    In the figures for M1 above, you can see the performance difference for using 2D arrays in comparison to 1D offset arrays. Using 1D array for matrix multiplication eliminated the performance dip we were experiencing around N = 2000.
 
-6. How does the measured performance for multiple _N_'s compare to peak? Are there any "features" in your plot? Explain them in the context of the hardware architecture of your system. Include in your write-up a description of your system's architecture (processor, cache, etc.).
+7. How does the measured performance for multiple _N_'s compare to peak? Are there any "features" in your plot? Explain them in the context of the hardware architecture of your system. Include in your write-up a description of your system's architecture (processor, cache, etc.).
 
     ![N = 2500 Performance Measurements M1 Pro (2D Matrix)](performance_berk_laptop.png)
     M1 Pro: 8 Performance Cores (3.2 Ghz) + 2 Efficieny cores (2.02 Ghz). During matrix multiplication, CPU utilization never reached above 40% on efficiency cores while other programs running in the background. There is a dip in the performance at N = 1950, 2000. This may be due to the cache memory limitations.
@@ -80,7 +84,7 @@ In response below, obtained by running on the HPCC (See roofline.png) and Berk's
 ![Roofline plot on HPPC](rooflineHPCC_Team8.png)
 ![Roofline plot on Mac M1 Pro](ERT_GRAPH_m1-1.png)
 
-Notice that there is no L3 cache listed on the roofline model for the HPCC. That is because the software has a difficult time distingishing the memory allocation of DRAM and L3. Therefore, the software treats L3 and DRAM as equivalent. The same is true for the M1 pro. Since the software shows that the L2 is indistinguishable from L1 and DRAM, it grouped L2 into DRAM which and did not label L2 on the roofline model graph. 
+Notice that there is no L3 cache listed on the roofline model for the HPCC. That is because the software has a difficult time distingishing the memory allocation of DRAM and L3. Therefore, the software treats L3 and DRAM as equivalent. The same is true for the M1 pro. Since the software shows that the L2 is indistinguishable from L1 and DRAM, it grouped L2 into DRAM which and did not label L2 on the roofline model graph.
 Additionally, the peak performance for the HPCC is different by a factor of four when compared to the calculated and computed values. This is due to GNUplot not vectorizing our program. Since there are four threads per core on dev node 18, our program was running on only one thread which makes our peak performance off by a factor of four.
 
 4. Consider the four FP kernels in "Roofline: An Insightful Visual Performance Model for Floating-Point Programs and Multicore Architectures" (see their Table 2). Assuming the high end of operational (i.e., "arithmetic") intensity, how would these kernels perform on the platforms you are testing? What optimization strategy would you recommend to increase performance of these kernels?
@@ -94,7 +98,6 @@ Additionally, the peak performance for the HPCC is different by a factor of four
     Stencil: (0.33 to 0.5 OI) Jacobi method, must read every point from DRAM, perform 8 flops, and then write every point back to DRAM. Cache locality is the most important factor when it comes to performance of the Stencil kernel. Performs at just over 0.5 flops/byte ideally, which is achieved by optimizing using SIMDization and cache bypass. Stencil can also be optimized to a 1/3 flop:byte ratio using cache blocking, which we also recommend. Given stencil's dependency on DRAM, we can look the roofline model graphs above for both Berk's laptop and the HPCC. Since stencil is DRAM bound on the HPCC at 20.7 GB/s and DRAM bound on Berk's computer at 109.6 GB/s, stencil will run faster on Berk's computer compared to the HPCC.
 
     3-D FFT: (1.09 to 1.64 OI) Rather high operational intensity. It will be compute bound, so the performance will be limited by the stength of computation of the system. Optimization of computation leads to better performance, so in additon to SIMDization and cache bypass, we would also recommend unrolling loops. 3-D FFT is a compute bound kernel, so it will run on the system with the better computation power. Looking at the roofline models, 3-D FFT will run faster on Berk's laptop because FFT is DRAM bound on the HPCC at 20.7 GB/s and DRAM bound on Berk's computer at 109.6 GB/s, stencil will run faster on Berk's computer compared to the HPCC.
-
 
 5. Address the same questions in (4) for the four kernels given in the Warm-up above.
 
